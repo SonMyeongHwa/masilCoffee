@@ -23,7 +23,7 @@ class OrderService {
 
   static async getOrderById(userId) {
     try {
-      const Orders = await Order.findOne({ user: userId });
+      const Orders = await Order.find({ user: userId });
       return Orders;
     } catch (error) {
       throw error;

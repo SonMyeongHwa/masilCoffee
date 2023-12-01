@@ -37,21 +37,6 @@ app.use("/api/v1/comment", CommentRouter);
 app.use("/api/v1/like", LikeRouter);
 app.use("/api/v1/order", OrderRouter);
 app.use("/api/v1/orderOption", OrderOptionRouter);
-// single("여기이름이랑") Key 값이 일치해야함
-// posturl : http://localhost:5000/test/image?directory=product
-// /test/image 는 라우터 호출하는 주소,
-// ? 뒤부터는 directory 는 aws 에 저장되는 폴더
-// product는 그 폴더명
-app.post("/test/image", imageUploader.single("image"), (req, res) => {
-  if (req.file) {
-    // 이미지 업로드 성공
-    res.send("good");
-  } else {
-    // 이미지 업로드 실패
-    console.error("Image upload failed");
-    res.status(500).send("Image upload failed");
-  }
-});
 
 //PORT
 const PORT = process.env.PORT;
