@@ -6,7 +6,7 @@ function OrderListForm({ orders }) {
 
   return (
     <div>
-      {orders.map((order) => {
+      {orders?.map((order) => {
         return (
           <S.orderUL>
             <S.orderLI>
@@ -20,7 +20,7 @@ function OrderListForm({ orders }) {
                 </S.PackingOption>
               </div>
               <div>
-                {order.orderDetail.map((item) => {
+                {order.orderDetail?.map((item) => {
                   return (
                     <ul>
                       <S.itemUL>
@@ -29,12 +29,12 @@ function OrderListForm({ orders }) {
                       </S.itemUL>
                     </ul>
                   );
-                })}
+                }) || []}
               </div>
             </S.orderLI>
           </S.orderUL>
         );
-      })}
+      }) || []}
     </div>
   );
 }
