@@ -1,44 +1,55 @@
-import React from 'react'
-import { Paginamtion, PaginationItem } from '../style/CommentList.style'
-import { StyledTable } from '../style/StyledTable'
-import Contents from '../../../components/ui/contents/Contents'
-import { CommentTitle } from '../style/MyPage.style'
+import React, { useEffect, useState } from "react";
+import { Paginamtion, PaginationItem } from "../style/CommentList.style";
+import { StyledTable } from "../style/StyledTable";
+import { CommentTitle } from "../style/MyPage.style";
+import DateFormat from "../../../util/DateFormat/DateFormat";
 
-function WriteListForm({trData, tdData}) {
+
+
+
+function WriteListForm({onInsert, data}) {
+  const [page, setPage] = useState(1);
+  const dateType = "dateTime"
+  
+  const numbers = Array.from({length: data.totalpage || 0}, (_, index) => index + 1);
+  
+  const dataSet = data.data.map((data, index)=> {
+    const date = DateFormat(dateType, data.createdAt)
+    console.log(typeof data.createdAt)
+    return [...[data._id, index + 1, data.post, date]]
+  })
+
+
+  const handleClick = (e) => {
+    setPage(parseInt(e.target.name, 10));
+  };
+
+
+  useEffect(() => {
+    onInsert(page)
+  }, [page]);
+
+  
   return (
-      <div>
+    <div>
       <CommentTitle>내가 작성한 글</CommentTitle>
-
-        <StyledTable trData={trData} tdData={tdData}/>
-        <Paginamtion>
-          <PaginationItem href="#">&laquo;</PaginationItem>
-          <PaginationItem href="#">1</PaginationItem>
-          <PaginationItem href="#">2</PaginationItem>
-          <PaginationItem href="#">3</PaginationItem>
-          <PaginationItem href="#">4</PaginationItem>
-          <PaginationItem href="#">5</PaginationItem>
-          <PaginationItem href="#">6</PaginationItem>
-          <PaginationItem href="#">&raquo;</PaginationItem>
-        </Paginamtion>
-
+      <StyledTable trData={data.trData} tdData={dataSet} />
+      <Paginamtion>
+        <PaginationItem href="#">&laquo;</PaginationItem>
+        <div>
+          {numbers.map(number => {
+            return (
+              <PaginationItem name={number} href="#" onClick={handleClick}>
+                {number}
+              </PaginationItem>
+            )
+          })}
+            
+        </div>
+        <PaginationItem href="#">&raquo;</PaginationItem>
+      </Paginamtion>
     </div>
-  )
+  );
 }
 
-export default WriteListForm
-
-WriteListForm.defaultProps = {
-  trData: ["번호", "제목", "작성날짜"],
-  tdData: [
-    ["1", "인생의 회전적토마", "2021.12.25" ],
-    ["2", "인생의 회전적토마", "2021.12.25" ],
-    ["3", "인생의 회전적토마", "2021.12.25" ],
-    ["4", "인생의 회전적토마", "2021.12.25"],
-    ["5", "인생의 회전적토마", "2021.12.25"],
-    ["6", "인생의 회전적토마", "2021.12.25"],
-    ["7", "인생의 회전적토마", "2021.12.25"],
-    ["8", "인생의 회전적토마", "2021.12.25"],
-    ["9", "인생의 회전적토마", "2021.12.25"],
-    ["10", "인생의 회전적토마", "2021.12.25"],
-  ],
-}
+export default WriteListForm;

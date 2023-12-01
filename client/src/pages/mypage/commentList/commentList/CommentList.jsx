@@ -1,55 +1,56 @@
-import React from "react";
-
-import Contents from "../../../../components/ui/contents/Contents";
-import LinkTo from "../../../../components/ui/Link/LinkTo";
-import Container from "../../../../components/ui/container/Container";
-
-import { CommentTitle } from "../../style/MyPage.style";
-import {
-  ListTag,
-  TextBox,
-  PaginationItem,
-  Paginamtion,
-} from "../../style/CommentList.style";
+import React, { useState } from "react";
+import { Paginamtion, PaginationItem } from "../../style/CommentList.style";
 import { StyledTable } from "../../style/StyledTable";
-import Card from "../../../../components/ui/card/Card";
+import { CommentTitle } from "../../style/MyPage.style";
+
+import { usePagination } from "../../../../hooks/usePagination";
+
+import sliceTen from "../../../../util/forPagenation/sliceTen";
 
 function CommentList({ trData, tdData }) {
+  const [page, setPage] = useState(1);
+
+  const pageConst = {
+    totalCount: tdData.length,
+    pageSize: 10,
+    siblingCount: 1,
+    currentPage: page,
+  };
+
+  const pageSize = pageConst.pageSize;
+  const currentPage = pageConst.currentPage;
+
+  const pageArr = usePagination(pageConst);
+
+  const slicedData = sliceTen({
+    currentPage: currentPage,
+    pageSize: pageSize,
+    initDataSet: tdData,
+  });
+
+  const handleClick = (e) => {
+    setPage(parseInt(e.target.name, 10));
+  };
+
   return (
     <div>
-      <CommentTitle>내가 작성한 글</CommentTitle>
-      <Contents>
-        <StyledTable trData={trData} tdData={tdData} />
-
-        <Paginamtion>
-          <PaginationItem href="#">&laquo;</PaginationItem>
-          <PaginationItem href="#">1</PaginationItem>
-          <PaginationItem href="#">2</PaginationItem>
-          <PaginationItem href="#">3</PaginationItem>
-          <PaginationItem href="#">4</PaginationItem>
-          <PaginationItem href="#">5</PaginationItem>
-          <PaginationItem href="#">6</PaginationItem>
-          <PaginationItem href="#">&raquo;</PaginationItem>
-        </Paginamtion>
-      </Contents>
+      <CommentTitle>내가 작성한 댓글</CommentTitle>
+      <StyledTable trData={trData} tdData={slicedData} />
+      <Paginamtion>
+        <PaginationItem href="#">&laquo;</PaginationItem>
+        <div>
+          {pageArr.map((arr) => {
+            return (
+              <PaginationItem name={arr} href="#" onClick={handleClick}>
+                {arr}
+              </PaginationItem>
+            );
+          })}
+        </div>
+        <PaginationItem href="#">&raquo;</PaginationItem>
+      </Paginamtion>
     </div>
   );
 }
 
 export default CommentList;
-
-CommentList.defaultProps = {
-  trData: ["번호", "제목", "날짜"],
-  tdData: [
-    ["1", "인생의 회전적토마", "ASDf@naver.com"],
-    ["2", "인생의 회전적토마", "ASDf@naver.com"],
-    ["3", "인생의 회전적토마", "ASDf@naver.com"],
-    ["4", "인생의 회전적토마", "ASDf@naver.com"],
-    ["5", "인생의 회전적토마", "ASDf@naver.com"],
-    ["6", "인생의 회전적토마", "ASDf@naver.com"],
-    ["7", "인생의 회전적토마", "ASDf@naver.com"],
-    ["8", "인생의 회전적토마", "ASDf@naver.com"],
-    ["9", "인생의 회전적토마", "ASDf@naver.com"],
-    ["10", "인생의 회전적토마", "ASDf@naver.com"],
-  ],
-};

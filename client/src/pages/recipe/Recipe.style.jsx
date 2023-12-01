@@ -1,21 +1,30 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 //배경
 export const Background = styled.div`
-  background: #8e0e28;
+  background: #d9d9d9;
   min-height: 100vh;
+
+  @media all and (min-width: 1023px) {
+    padding: 50px 0;
+  }
 `;
 
 //배경위에 흰색 배경
 export const ContainerWrap = styled.div`
   background: white;
-  width: 70vw;
+  width: 100vw;
   min-height: 100vh;
   box-sizing: border-box;
   margin: 0 auto;
+  padding-top: 30px;
+  border-radius: 0px;
+  overflow: hidden; /* 자식이 부모의 border-radius를 따라가도록 함 */
 
-  @media all and (max-width: 1023px) {
-    width: 100vw;
+  @media all and (min-width: 1023px) {
+    width: 70vw;
+    border-radius: 30px 0px 30px 0px;
   }
 `;
 
@@ -37,7 +46,7 @@ export const Container = styled.div`
 export const Wrap = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  margin: 20px 0;
 `;
 
 //제목
@@ -67,7 +76,6 @@ export const Button = styled.button`
 export const SearchInput = styled.input`
   width: 100%;
   padding: 0px 15px;
-  margin-right: 10px;
   box-sizing: border-box;
   border: 1px solid #d9d9d9;
   border-radius: 5px;
@@ -77,7 +85,7 @@ export const SearchInput = styled.input`
 export const CategoryWrap = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 30px;
+  margin: 20px 0;
 `;
 
 //카테고리 버튼
@@ -87,7 +95,10 @@ export const CategoryBtn = styled.button`
   border-radius: 30px;
   cursor: pointer;
   white-space: nowrap;
-  transition: background 0.3s, color 0.3s ease, border 0.3s;
+  transition: background 0.2s, color 0.2s ease, border 0.2s;
+
+  background-color: ${(props) => props.className === "active" ? "#8e0e28" : "#f5f5f5"};
+  color: ${(props) => props.className === "active" ? "white" : "black"};
 
   &:hover {
     background: #8e0e28;
@@ -112,33 +123,24 @@ export const PostWrap = styled.div`
   }
 `;
 
-//게시글 닉네임
-export const PostNickname = styled.span`
-  font-weight: bold;
+export const StyledLink = styled(Link)`
+  color: black;
+  text-decoration: none;
 `;
 
-//게시글 날짜
-export const PostDate = styled.span`
-  font-size: 0.8rem;
-  margin-left: 15px;
-`;
+export const ShowMore = styled.button`
+  border: none;
+  width: inherit;
+  height: 50px;
+  text-align: center;
+  background: #878585;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
 
-//게시글
-export const PostPre = styled.pre`
-  font-size: 1rem;
-  white-space: pre-wrap;
-  word-break: break-all;
-  margin: 0.5rem 0;
-`;
-
-//댓글 감싸는 div
-export const CommentWrap = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 30px;
-`;
-
-//댓글 갯수
-export const CommentNum = styled.span`
-  margin-left: 5px;
+  &:hover {
+    background: #4f4f4f;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  }
 `;

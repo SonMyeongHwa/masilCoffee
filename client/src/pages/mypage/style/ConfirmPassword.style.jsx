@@ -11,7 +11,7 @@ export const InputCard = styled.div`
   align-items: center;
   text-align: center;
 
-  border-radius: 30px 0px px 0px;
+  border-radius: 30px 0px 30px 0px;
 `;
 
 export const InputBox = styled.div`

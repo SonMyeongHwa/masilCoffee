@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { createStore } from "redux";
 import axios from "axios";
+import { apiInstance } from "../../api/interceptor/apiInstance";
 
 const initialState = {
   product: [],
@@ -31,8 +32,8 @@ const Product = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/v1/products")
+    apiInstance
+      .get("/api/v1/products")
       .then((res) => res.data)
       .then((data) => dispatch(initData(data)));
   }, []);

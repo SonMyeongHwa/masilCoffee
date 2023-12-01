@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 function Card(props) {
 
-  console.log("non", props.NonFlex)
   return (
     <div>
       {props.NonFlex ? (

@@ -1,55 +1,59 @@
 import React, { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../../../router/Routes";
+
 import Contents from "../../../../components/ui/contents/Contents";
 import Card from "../../../../components/ui/card/Card";
-
 import { InputCard } from "../../style/InputCard";
 import { BtnConfirm } from "../../style/BtnConfirm";
 import { ButtonBox } from "../../style/ButtonBox";
-
 import styled from "styled-components";
 
 import UserInfoForm from "./UserInfoForm";
 
-function UserInfoView() {
-  const emailRef = useRef(null);
-  const nameRef = useRef(null);
-  const birthRef = useRef(null);
-  const phoneRef = useRef(null);
+const InputInfo = [
+  {
+    name: "이름",
+    type: "text",
+    id: "change_name",
+    placeholder: "변경할 이름을 입력해주세요.",
+  },
+  {
+    name: "닉네임",
+    type: "text",
+    id: "change_nkname",
+    placeholder: "변경할 닉네임을 입력해주세요.",
+    double: true
+  },
+  {
+    name: "전화번호",
+    type: "tel",
+    id: "change_tel",
+    placeholder: "변경할 전화번호를 입력해주세요.",
+  },
+];
 
-  const InputInfo = [
-    {
-      ref: nameRef,
-      name: "이름",
-      type: "text",
-      id: "change_name",
-      placeholder: "변경할 이름을 입력해주세요.",
-    },
-    {
-      ref: birthRef,
-      name: "생년월일",
-      type: "date",
-      id: "change_birth",
-      placeholder: "변경할 생년월일을 입력해주세요.",
-    },
-    {
-      ref: phoneRef,
-      name: "전화번호",
-      type: "tel",
-      id: "change_tel",
-      placeholder: "변경할 전화번호를 입력해주세요.",
-    },
-  ];
+function UserInfoView({ userEmail }) {
+  const nav = useNavigate()
+  
+  const navConfirmPost = () => {
+    nav(`${ROUTES.CONFIRMPASSWORD.path}/post`)
+  }
+  const navConfirmDel = () => {
+    nav(`${ROUTES.CONFIRMPASSWORD.path}/del`)
+
+  }
 
   return (
     <div>
       <Contents>
         <Card>
           <InputCard>
-            <h3>회원 정보</h3>
-            <UserInfoForm emailRef={emailRef} InputInfo={InputInfo} />
+            <h3>회원 정보 변경</h3>
+            <UserInfoForm InputInfo={InputInfo} email={userEmail} />
             <ButtonBox>
-              <DeleteBtn>회원탈퇴</DeleteBtn>
-              <BtnConfirm>회원정보 변경</BtnConfirm>
+              <DeleteBtn onClick={navConfirmDel}>회원탈퇴</DeleteBtn>
+              <BtnConfirm onClick={navConfirmPost}>회원정보 변경</BtnConfirm>
             </ButtonBox>
           </InputCard>
         </Card>

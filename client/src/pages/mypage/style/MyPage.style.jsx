@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { media } from "../mediaQ/media";
+import { media } from "../../../util/mediaQ/media";
+import { back_ground_color } from "../../../type/color_type";
 
 export const UserTitle = styled.h1`
   text-align: center;
@@ -23,16 +24,6 @@ export const CommentTitle = styled.h1`
   width: 100%;
 `;
 
-
-
-
-
-
-export const ContentsByWrite = styled.div`
-  display: flex;
-  flex-direction: column-reverse;
-`;
-
 export const UserLinkBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -50,7 +41,7 @@ export const UserLinkBox = styled.div`
 
   margin: 13px;
 
-  border: solid 5px #8e0e28;
+  border: solid 5px ${back_ground_color.main_color};
   border-radius: 63px 0px 0px 0px;
 
   transition: all 200ms ease-in-out 0ms;
@@ -58,6 +49,20 @@ export const UserLinkBox = styled.div`
   &:hover {
     border-radius: 63px 63px 63px 63px;
   }
+
+  ${media.medium`
+  border-radius: 63px 0px 0px 63px;
+  width: 100%;
+  height: 90%;
+  
+  `}
+  ${media.mini`
+  border-radius: 63px 0px 0px 63px;
+  width: 100%;
+  height: 90%;
+  font-size: 16px;
+  text-align: center;
+  `}
 `;
 
 export const OrderLinkBox = styled.div`
@@ -70,7 +75,7 @@ export const OrderLinkBox = styled.div`
 
   margin: 13px;
 
-  background: #8e0e28;
+  background: ${back_ground_color.main_color};
 
   color: #f5f5f5;
 
@@ -80,11 +85,33 @@ export const OrderLinkBox = styled.div`
   font-weight: 800;
   line-height: normal;
   transition: all 200ms ease-in-out 0ms;
+  cursor: pointer;
 
   &:hover {
     color: #191414;
     border-radius: 63px 63px 63px 63px;
   }
+
+  ${media.medium`
+  border-radius: 0px 0px 0px 0px;
+  width: 90%;
+  height: 45%;
+  margin-bottom : 6.5px;
+  font-size: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  `}
+  ${media.mini`
+  border-radius: 0px 0px 0px 0px;
+  width: 90%;
+  height: 45%;
+  margin-bottom : 6.5px;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  
+  `}
 `;
 
 export const CommentLinkBox = styled.div`
@@ -97,7 +124,7 @@ export const CommentLinkBox = styled.div`
 
   margin: 13px;
 
-  background: #8e0e28;
+  background: ${back_ground_color.main_color};
 
   color: #f5f5f5;
 
@@ -106,11 +133,32 @@ export const CommentLinkBox = styled.div`
   font-style: normal;
   font-weight: 800;
   transition: all 200ms ease-in-out 0ms;
+  cursor: pointer;
 
   &:hover {
     color: #191414;
     border-radius: 63px 63px 63px 63px;
   }
+
+  ${media.medium`
+  border-radius: 0px 0px 0px 0px;
+  width: 90%;
+  height: 45%;
+  margin-top : 6.5px;
+  font-size: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  `}
+  ${media.mini`
+  border-radius: 0px 0px 0px 0px;
+  width: 90%;
+  height: 45%;
+  margin-top : 6.5px;
+  font-size: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+  
+  `}
 `;
 
 export const WriteLinkBox = styled.div`
@@ -127,6 +175,7 @@ export const WriteLinkBox = styled.div`
   background: #878585;
 
   color: #f5f5f5;
+  cursor: pointer;
 
   font-family: Inter;
   font-size: 30px;
@@ -139,6 +188,20 @@ export const WriteLinkBox = styled.div`
     border-radius: 63px 63px 63px 63px;
     color: #191414;
   }
+
+  ${media.medium`
+  border-radius: 0px 40px 40px 0px;
+  width: 90%;
+  height: 92%;
+  font-size: 25px;
+  `}
+  ${media.mini`
+  border-radius: 0px 40px 40px 0px;
+  width: 90%;
+  height: 92%;
+  font-size: 20px;
+  
+  `}
 `;
 
 export const LinkUserInfo = styled.button`
@@ -161,6 +224,15 @@ export const LinkUserInfo = styled.button`
     color: #d9d9d9;
     border-color: #d9d9d9;
   }
+
+  ${media.medium`
+  border-radius: 63px 63px 63px 63px;
+  
+  `}
+  ${media.mini`
+  border-radius: 63px 63px 63px 63px;
+  
+  `}
 `;
 
 export const CenterBox = styled.div`
@@ -171,6 +243,56 @@ export const CenterBox = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  
+
   padding-top: 74px;
+`;
+
+export const MyPageFirstContents = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  ${media.medium`
+  width: auto;
+  margin: 12px;
+  flex: 1 1 auto;
+flex-direction: row;
+justify-content: center;
+
+  `}
+  ${media.mini`
+  width: auto;
+  margin: 12px;
+  flex: 1 1 auto;
+flex-direction: row;
+justify-content: center;
+  `}
+`;
+
+export const MyPageMiddleContents = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  ${media.medium`
+  margin: 12px;
+
+`}
+  ${media.mini`
+  margin: 12px;
+`}
+`;
+
+export const ContentsByWrite = styled.div`
+  display: flex;
+  flex-direction: column-reverse;
+
+  ${media.medium`
+  margin: 12px;
+  flex-direction: column;
+
+  
+  `}
+  ${media.mini`
+  margin: 12px;
+  flex-direction: column;
+  `}
 `;

@@ -1,13 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { ROUTES } from '../../../router/Routes';
 
 
 
-function LinkTo({there, style}) {
-  
+
+
+function LinkTo({there, style}) {  
 
   return (
-    <Link to={there.to} style={{...style}}>
+    <Link to={there.to} style={style}>
       {there.name}
     </Link>
   )

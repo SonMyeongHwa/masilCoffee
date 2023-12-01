@@ -1,5 +1,6 @@
-import Main from "../pages/main/Main";
+import Main from "../pages/main/MainPage";
 import Login from "../pages/login/Login";
+import Logout from "../pages/login/Logout";
 import Register from "../pages/register/Register";
 
 import Order from "../pages/order/Order";
@@ -21,6 +22,7 @@ import CommentListPage from "../pages/mypage/commentList/CommentListPage.jsx";
 import AdminOrder from "../pages/admin/adminOrder/AdminOrder";
 import AdminMenu from "../pages/admin/adminMenu/AdminMenu";
 import AdminUser from "../pages/admin/adminUser/AdminUser.jsx";
+import NotFound from "../pages/error/NotFound.jsx";
 
 // 재사용성 강화
 // 가독성 증진
@@ -40,6 +42,11 @@ export const ROUTES = {
     path: "/login",
     link: "/login",
     element: <Login />,
+  },
+  LOGOUT: {
+    path: "/logout",
+    link: "/logout",
+    element: <Logout />,
   },
   REGISTER: {
     path: "/Register",
@@ -75,7 +82,7 @@ export const ROUTES = {
   },
   RECIPEVIEW: {
     path: "/RecipeView",
-    link: "/RecipeView",
+    link: "/RecipeView/:boardId",
     element: <RecipeView />,
   },
   RECIPEWRITE: {
@@ -90,28 +97,28 @@ export const ROUTES = {
     element: <MyPage />,
   },
   USERINFOCHANGE: {
-    path: "/UserInfoChange",
-    link: "/UserInfoChange",
+    path: "/mypage/userInfoChange",
+    link: "/mypage/userInfoChange/:email",
     element: <UserInfoChange />,
   },
   CONFIRMPASSWORD: {
-    path: "/ConfirmPassword",
-    link: "/ConfirmPassword",
+    path: "/mypage/confirmPassword",
+    link: "/mypage/confirmPassword/:req",
     element: <ConfirmPassword />,
   },
   ORDERDETAILS: {
-    path: "/OrderDetails",
-    link: "/OrderDetails",
+    path: "/mypage/orderDetails",
+    link: "/mypage/orderDetails/:user_id",
     element: <OrderDetails />,
   },
   WRITELIST: {
-    path: "/WriteList",
-    link: "/WriteList",
+    path: "/mypage/writeList",
+    link: "/mypage/writeList/:user_id",
     element: <WriteList />,
   },
   COMMENTLISTPAGE: {
-    path: "/CommentListpage",
-    link: "/CommentListpage",
+    path: "/mypage/commentListpage",
+    link: "/mypage/commentListpage/:user_id",
     element: <CommentListPage />,
   },
 
@@ -129,6 +136,22 @@ export const ROUTES = {
     path: "/admin/user",
     link: "/admin/user",
     element: <AdminUser />,
+  },
+  
+  NOTFOUND: {
+    path: "/*",
+    link: "/*",
+    element: <NotFound code={404}/>,
+  },
+  BADREQUEST: {
+    path: "/badrequest",
+    link: "/badrequest",
+    element: <NotFound code={400}/>,
+  },
+  INTERNALSERVERERROR: {
+    path: "/internalservererror",
+    link: "/internalservererror",
+    element: <NotFound code={500} />,
   },
 };
 

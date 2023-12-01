@@ -1,7 +1,12 @@
 import React from "react";
 import RouterComp from "./router/RouterComp";
+
 function App() {
-  return <RouterComp />;
+  return (
+    <div>
+      <RouterComp />
+    </div>
+  );
 }
 
 export default App;

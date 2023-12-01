@@ -1,19 +1,27 @@
 import styled from "styled-components";
+import IncludeRedPage from "../../../util/IncludeRedPage";
+import backgroundColor from "../../../util/BackgoundColor";
+import { back_ground_color, txt_color } from "../../../type/color_type";
+import { ROUTES } from "../../../router/Routes";
 
 export const Footers = styled.footer`
-  height: 150px;
-
-  background: ${props => (props.location === "/Recipe" ? "#f5f5f5" : "#8e0e28")};
+  background: ${(props) => backgroundColor(props.location)};
 `;
 
-
 export const FooterText = styled.p`
-  color: ${props => (props.location === "/Recipe" ? "#8e0e28" : "#f5f5f5")};
+  color: ${(props) =>
+    IncludeRedPage(props.location) ||
+    props.location === ROUTES.ADMINMENU.path ||
+    props.location === ROUTES.ADMINORDER.path ||
+    props.location === ROUTES.ADMINMUSER.path
+      ? txt_color.main_color
+      : txt_color.sub_color};
 
   font-size: 14px;
   font-weight: 400;
 `;
 
-export const textBox = styled.div`
-  marigin: 14px;
-`
+export const TextBox = styled.div`
+  padding: 20px;
+  box-sizing: border-box;
+`;

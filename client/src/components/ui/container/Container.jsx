@@ -9,9 +9,10 @@ export default Container;
 
 const SContainer = styled.div`
   width: 100%;
-  min-height: 100vh;
+  min-height: 100%;
 
   background-color: #f5f5f5;
 
   overflow: auto;
+  padding-bottom: 30px;
 `;

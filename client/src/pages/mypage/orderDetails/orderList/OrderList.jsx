@@ -1,108 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import *as S from "../../style/OrderDetails.style"
 
 import OrderListForm from "./OrderListForm"
+import { getPayment, deletePayment } from "../../../../api/payment/payment";
 
 
-function OrderList({ orders }) {
+function OrderList() {
+  const [orders, setOsers] = useState({ orders: []})
+  console.log("state", orders)
+
+  useEffect(() => {
+    const axiosFn = async () => {
+      const res = await getPayment();
+      console.log("res", res)
+      setOsers(current => {
+        return {
+          ...current,
+          orders: [res]
+        }
+      })
+    }
+
+    axiosFn()
+  }, [])
+
+  const handleCancel = (orderId) => {
+    axiosCancel(orderId);
+  }
+
+  const axiosCancel = async (orderId) => {
+    await deletePayment(orderId);
+
+  }
+
   return (
     <S.ListBox>
-      <OrderListForm orders={orders}/>
+      <OrderListForm orders={orders.orders} onCancel={handleCancel}/>
     </S.ListBox>
   );
 }
 
 export default OrderList;
-
-
-OrderListForm.defaultProps = {
-  orders: [
-    {
-      date: "2023.11.16",
-      orderNumber: 12045533,
-      isPacking: true,
-      items: [
-        {
-          name: "아이스 아메리카노",
-          id: 1234,
-          isIce: true,
-          cup_size: "Tall",
-          syrup: "바닐라 시럽 1",
-        },
-
-        {
-          name: "샤케라또",
-          id: 2999,
-          isIce: true,
-          cup_size: "Large",
-          syrup: "none",
-        },
-        {
-          name: "샤케라또",
-          id: 2999,
-          isIce: true,
-          cup_size: "Large",
-          syrup: "none",
-        },
-        {
-          name: "샤케라또",
-          id: 2999,
-          isIce: true,
-          cup_size: "Large",
-          syrup: "none",
-        },
-        {
-          name: "샤케라또",
-          id: 2999,
-          isIce: true,
-          cup_size: "Large",
-          syrup: "none",
-        },
-
-      ],
-    },
-
-    {
-      date: "2023.11.17",
-      orderNumber: 12344513,
-      isPacking: false,
-      items: [
-        {
-          name: "샤케라또",
-          id: 2999,
-          isIce: false,
-          cup_size: "Small",
-          syrup: "none",
-        },
-      ],
-    },
-    {
-      date: "2023.11.17",
-      orderNumber: 12344513,
-      isPacking: false,
-      items: [
-        {
-          name: "샤케라또",
-          id: 2999,
-          isIce: false,
-          cup_size: "Small",
-          syrup: "none",
-        },
-      ],
-    },
-    {
-      date: "2023.11.17",
-      orderNumber: 12344513,
-      isPacking: false,
-      items: [
-        {
-          name: "샤케라또",
-          id: 2999,
-          isIce: false,
-          cup_size: "Small",
-          syrup: "none",
-        },
-      ],
-    },
-  ],
-};

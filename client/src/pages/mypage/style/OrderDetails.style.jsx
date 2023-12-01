@@ -1,12 +1,11 @@
 import styled from "styled-components";
-import { media } from "../mediaQ/media";
+import { media } from "../../../util/mediaQ/media";
 
 export const ListBox = styled.div`
   width: 1176.98px;
   height: 600px;
   overflow: auto;
-
-`
+`;
 
 export const orderUL = styled.ul`
   list-style: none;

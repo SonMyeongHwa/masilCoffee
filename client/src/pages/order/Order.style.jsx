@@ -1,12 +1,15 @@
 import styled from "styled-components";
 
 export const StyledOrder = styled.div`
-  max-width: 1100px;
-  margin: 0 auto;
-  box-sizing: border-box;
+  max-width: 1106px;
+  width: 100%;
+  margin: 100px auto;
+  font-family: "Noto Sans", sans-serif; // Noto Sans 폰트 적용
+  /* box-sizing: border-box; */
 
   /* 슬라이더 slick */
   .slick-slider {
+    max-width: 1106px;
     width: 100%;
     overflow-y: hidden;
     overflow-x: hidden;
@@ -14,20 +17,21 @@ export const StyledOrder = styled.div`
       overflow: initial;
     }
     .slick-track {
-      max-width: 1100px;
+      width: 1106px;
       display: flex;
       align-items: center;
     }
     .slick-slide > div {
+      width: 100%;
       display: flex;
 
       button {
         padding: 20px 30px;
-
-        box-sizing: border-box;
-        border: 1px solid #878585;
+        border: 1px solid #d9d9d9;
+        border-right: none;
         cursor: pointer;
         background-color: white;
+        font-size: 14px;
       }
       // 첫 번째 버튼 스타일
       .first-button {
@@ -39,6 +43,7 @@ export const StyledOrder = styled.div`
       .last-button {
         border-bottom-right-radius: 10px;
         border-top-right-radius: 10px;
+        border-right: 1px solid #d9d9d9;
       }
       .selected-button {
         background-color: #650818;
@@ -59,35 +64,30 @@ export const StyledOrder = styled.div`
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    min-height: 400px;
+    overflow-y: auto;
+
+    .card {
+      width: calc(33.3% - 10px);
+      margin-bottom: 20px;
+    }
+    /* 모바일 환경을 위한 미디어 쿼리 */
+    @media (max-width: 998px) {
+      .card {
+        width: calc(50% - 10px);
+      }
+    }
+    /* 탭을 위한 미디어 쿼리 */
+    @media (max-width: 640px) {
+      .card {
+        width: 100%;
+      }
+    }
   }
   .buttons-container {
     display: flex;
     justify-content: center;
     gap: 20px;
     margin-top: 20px;
-  }
-
-  .card {
-    margin-bottom: 20px;
-  }
-
-  /* 모바일 환경을 위한 미디어 쿼리 */
-  @media (max-width: 768px) {
-    .card {
-      width: calc(50% - 10px);
-    }
-  }
-  /* 탭을 위한 미디어 쿼리 */
-  @media (max-width: 480px) {
-    .card {
-      width: 100%;
-    }
-  }
-  /* 데스크톱 환경을 위한 미디어 쿼리 */
-  @media (min-width: 1920px) {
-    .card {
-      width: calc(33.33% - 10px); //
-    }
   }
 `;
