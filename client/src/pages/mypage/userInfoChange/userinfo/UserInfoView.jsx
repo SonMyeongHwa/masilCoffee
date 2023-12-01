@@ -11,38 +11,42 @@ import styled from "styled-components";
 
 import UserInfoForm from "./UserInfoForm";
 
-const InputInfo = [
-  {
-    name: "이름",
-    type: "text",
-    id: "change_name",
-    placeholder: "변경할 이름을 입력해주세요.",
-  },
-  {
-    name: "닉네임",
-    type: "text",
-    id: "change_nkname",
-    placeholder: "변경할 닉네임을 입력해주세요.",
-    double: true
-  },
-  {
-    name: "전화번호",
-    type: "tel",
-    id: "change_tel",
-    placeholder: "변경할 전화번호를 입력해주세요.",
-  },
-];
+function UserInfoView({ userEmail, originInfo }) {
+  const { name, nickname, phone } = originInfo;
 
-function UserInfoView({ userEmail }) {
-  const nav = useNavigate()
-  
+  const InputInfo = [
+    {
+      name: "이름",
+      type: "text",
+      id: "change_name",
+      placeholder: "변경할 이름을 입력해주세요.",
+      value: name,
+    },
+    {
+      name: "닉네임",
+      type: "text",
+      id: "change_nkname",
+      placeholder: "변경할 닉네임을 입력해주세요.",
+      double: true,
+      value: nickname,
+    },
+    {
+      name: "전화번호",
+      type: "tel",
+      id: "change_tel",
+      placeholder: "변경할 전화번호를 입력해주세요.",
+      value: phone,
+    },
+  ];
+
+  const nav = useNavigate();
+
   const navConfirmPost = () => {
-    nav(`${ROUTES.CONFIRMPASSWORD.path}/post`)
-  }
+    nav(`${ROUTES.CONFIRMPASSWORD.path}/post`);
+  };
   const navConfirmDel = () => {
-    nav(`${ROUTES.CONFIRMPASSWORD.path}/del`)
-
-  }
+    nav(`${ROUTES.CONFIRMPASSWORD.path}/del`);
+  };
 
   return (
     <div>

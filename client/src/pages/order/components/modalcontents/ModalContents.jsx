@@ -16,6 +16,7 @@ import {
   StyleQuantity,
   StyleButton,
   StyledTotalPrice,
+  StyleSlideContanier,
 } from "./ModalContents.style";
 
 import QuantityOption from "./components/QuantityOption";
@@ -118,22 +119,26 @@ const ModalContents = ({ data }) => {
           </StyleDisplay>
         </StyleInfo>
       </StyleText>
-      {Object.keys(options.selectedOptions).length > 0 &&
-        Object.keys(options.selectedOptions).map((optionName) => {
-          if (optionName === "shot" || optionName === "syrup") {
-            return <QuantityOption key={optionName} optionName={optionName} />;
-          } else if (
-            optionName === "milk" ||
-            optionName === "iceAmount" ||
-            optionName === "whipping" ||
-            optionName === "drizzle"
-          ) {
-            return <SelectOption key={optionName} optionName={optionName} />;
-          }
-        })}
-      <StyledTotalPrice>
-        <b>총가격 : {totalPrice}원 </b>
-      </StyledTotalPrice>
+      <StyleSlideContanier>
+        {Object.keys(options.selectedOptions).length > 0 &&
+          Object.keys(options.selectedOptions).map((optionName) => {
+            if (optionName === "shot" || optionName === "syrup") {
+              return (
+                <QuantityOption key={optionName} optionName={optionName} />
+              );
+            } else if (
+              optionName === "milk" ||
+              optionName === "iceAmount" ||
+              optionName === "whipping" ||
+              optionName === "drizzle"
+            ) {
+              return <SelectOption key={optionName} optionName={optionName} />;
+            }
+          })}
+        <StyledTotalPrice>
+          <b>총가격 : {totalPrice}원 </b>
+        </StyledTotalPrice>
+      </StyleSlideContanier>
 
       <StyleButton>
         <Button

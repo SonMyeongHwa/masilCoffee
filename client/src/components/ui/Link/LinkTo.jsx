@@ -9,7 +9,7 @@ import { ROUTES } from '../../../router/Routes';
 function LinkTo({there, style}) {  
 
   return (
-    <Link to={there.to} style={style}>
+    <Link  to={there.to} style={style}>
       {there.name}
     </Link>
   )

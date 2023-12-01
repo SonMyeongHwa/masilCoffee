@@ -11,14 +11,13 @@ const img_data = {
 function CartButton(props) {
   const nav = useNavigate();
 
-
   const handleClick = () => {
     nav(ROUTES.CART.path);
   };
 
   return (
     <div>
-      <ControllIcon onClick={handleClick} location={props.location}/>
+      <ControllIcon onClick={handleClick} location={props.location} />
     </div>
   );
 }

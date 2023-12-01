@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Background, ContainerWrap, Container, Title } from "../Recipe.style";
+import { Background, ContainerWrap, Container, Title, Loading } from "../Recipe.style";
 import * as S from "./RecipeWrite.style";
 import CategoryButton from "../components/CategoryButton";
 import FileUpload from "../components/FileUpload";
@@ -21,7 +21,7 @@ const RecipeWrite = () => {
   const [post, setPost] = useState("");
   const [keywords, setKeywords] = useState([]);
   const [images, setImages] = useState([]);
-  const [editBoard, setEditBoard] = useState({
+  const [editBoard, setEditBoard] = useState(boardId ? null : {
     category: "",
     post: "",
     tags: [],
@@ -38,10 +38,11 @@ const RecipeWrite = () => {
           console.log("err", err);
         }
       };
-      fn(); 
+      fn();
     }
     window.scrollTo(0, 0);
-  }, []);
+    console.log("editBoard", editBoard);
+  }, [boardId, token]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,11 +55,11 @@ const RecipeWrite = () => {
     const formData = new FormData();
     const keywordText = keywords.map((keyword) => keyword.text); //keywords에 text만 추출
 
-    if(category) formData.append("category", category);
-    if(post) formData.append("post", post);
+    if (category) formData.append("category", category);
+    if (post) formData.append("post", post);
     keywordText.forEach((keyword) => {
       formData.append("tags", keyword);
-    })
+    });
     images.forEach((file, index) => {
       formData.append("file", file);
     });
@@ -91,45 +92,49 @@ const RecipeWrite = () => {
     fn();
   };
 
+  if (editBoard === null) {
+    return <Loading>Loading...</Loading>;
+  }
+
   return (
     <Background>
       <ContainerWrap>
-        <Container>
-          <Title>나만의 꿀조합 {boardId ? "수정" : "작성"}하기</Title>
-          <CategoryButton
-            query={"edit"}
-            category={category}
-            setCategory={setCategory}
-            defaultValue={editBoard.category || ""}
-          />
-          <S.TextArea
-            placeholder="글 내용을 입력해주세요."
-            defaultValue={editBoard.post || ""}
-            onChange={(e) => setPost(e.target.value)}
-          />
-          <KeywordInput
-            keywords={keywords}
-            setKeywords={setKeywords}
-            defaultValue={editBoard.tags || []}
-          />
-          <FileUpload
-            images={images}
-            setImages={setImages}
-            defaultValue={editBoard.image || ""}
-          />
-          <S.ButtonWrap>
-            <SquareButton
-              text={boardId ? "수정하기" : "작성하기"}
-              type={"red"}
-              onClick={handleSubmit}
+          <Container>
+            <Title>나만의 꿀조합 {boardId ? "수정" : "작성"}하기</Title>
+            <CategoryButton
+              query={"edit"}
+              category={category}
+              setCategory={setCategory}
+              defaultValue={editBoard.category || ""}
             />
-            <SquareButton
-              text={"취소하기"}
-              type={"grey"}
-              onClick={() => navigate(-1)}
+            <S.TextArea
+              placeholder="글 내용을 입력해주세요."
+              defaultValue={editBoard.post || ""}
+              onChange={(e) => setPost(e.target.value)}
             />
-          </S.ButtonWrap>
-        </Container>
+            <KeywordInput
+              keywords={keywords}
+              setKeywords={setKeywords}
+              defaultValue={editBoard.tags || []}
+            />
+            <FileUpload
+              images={images}
+              setImages={setImages}
+              defaultValue={editBoard.image || ""}
+            />
+            <S.ButtonWrap>
+              <SquareButton
+                text={boardId ? "수정하기" : "작성하기"}
+                type={"red"}
+                onClick={handleSubmit}
+              />
+              <SquareButton
+                text={"취소하기"}
+                type={"grey"}
+                onClick={() => navigate(-1)}
+              />
+            </S.ButtonWrap>
+          </Container>
       </ContainerWrap>
     </Background>
   );

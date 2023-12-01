@@ -8,7 +8,6 @@ import { actionUpdateOrder } from "../../../../redux/action/paymentAction";
 
 const OrderReceipt = ({ data }) => {
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.login.token);
   const { date, nickname, request, totalPrice, packagingOption, orderDetail, _id } = data;
 
   const ORDER_STATUS = {

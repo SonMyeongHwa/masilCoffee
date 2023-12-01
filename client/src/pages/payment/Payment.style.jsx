@@ -16,17 +16,12 @@ export const StyledPaymentBox = styled.div`
 
   // 뷰포트 너비가 1024px 이하일 때
   @media (max-width: 1024px) {
-    width: 75%; // 너비를 줄임
+    width: 98%; // 너비를 줄임
   }
 
   // 뷰포트 너비가 768px 이하일 때
   @media (max-width: 768px) {
-    width: 90%; // 더 작은 화면에서는 더 넓게 설정
-  }
-
-  // 뷰포트 너비가 480px 이하일 때
-  @media (max-width: 480px) {
-    width: 100%; // 모바일 화면에서는 최대 너비로 설정
+    width: 95%; // 더 작은 화면에서는 더 넓게 설정
   }
 `;
 
@@ -93,17 +88,14 @@ export const StyledPayment = styled.div`
   align-items: center;
   text-align: center;
   border-radius: 30px 0px 30px 0px;
-
+  // 뷰포트 너비가 1024px 이하일 때
   @media (max-width: 1024px) {
-    width: 75%; // 화면이 작을 때는 너비를 줄임
+    width: 98%; // 너비를 줄임
   }
 
+  // 뷰포트 너비가 768px 이하일 때
   @media (max-width: 768px) {
-    width: 90%; // 더 작은 화면에서는 더 넓게 설정
-  }
-
-  @media (max-width: 480px) {
-    width: 100%; // 모바일 화면에서는 최대 너비로 설정
+    width: 100%; // 더 작은 화면에서는 더 넓게 설정
   }
 `;
 export const StyledInfo = styled.div`
@@ -115,50 +107,49 @@ export const StyledInfo = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
+  // 뷰포트 너비가 1024px 이하일 때
+  @media (max-width: 1024px) {
+    width: 100%; // 너비를 줄임
+    border-bottom: 1px solid #472e27;
+  }
+
+  // 뷰포트 너비가 768px 이하일 때
+  @media (max-width: 768px) {
+    width: 100%; // 더 작은 화면에서는 더 넓게 설정
+  }
+`;
+export const StyledInfoContainer = styled.div`
+  margin: 50px;
+  // 뷰포트 너비가 1024px 이하일 때
+  @media (max-width: 1024px) {
+    width: 98%; // 너비를 줄임
+  }
+
+  // 뷰포트 너비가 768px 이하일 때
+  @media (max-width: 768px) {
+    width: 100%; // 더 작은 화면에서는 더 넓게 설정
+  }
+`;
+
+export const StyledInfoBox = styled.div`
+  text-align: start;
+  margin: 0 auto;
 
   @media (max-width: 1024px) {
-    width: 75%; // 화면이 작을 때는 너비를 줄임
+    width: 100%; // 화면이 작을 때는 너비를 줄임
+    border-bottom: 1px solid #878585;
   }
 
   @media (max-width: 768px) {
     width: 90%; // 더 작은 화면에서는 더 넓게 설정
   }
-
-  @media (max-width: 480px) {
-    width: 100%; // 모바일 화면에서는 최대 너비로 설정
-  }
-`;
-export const StyledInfoContainer = styled.div`
-  margin: 50px;
 `;
 
-export const StyledInfoBox = styled.div`
-  text-align: start;
-  margin: 50px;
-`;
 export const StyledInputBox = styled.div`
   width: 850px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-
-  // 뷰포트 너비가 1024px 이하일 때
-  @media (max-width: 1024px) {
-    width: 75%; // 화면이 작을 때는 너비를 줄임
-    font-size: 12px;
-  }
-
-  // 뷰포트 너비가 768px 이하일 때
-  @media (max-width: 768px) {
-    width: 90%; // 더 작은 화면에서는 더 넓게 설정
-    font-size: 10px;
-  }
-
-  // 뷰포트 너비가 480px 이하일 때
-  @media (max-width: 480px) {
-    width: 100%; // 모바일 화면에서는 최대 너비로 설정
-    font-size: 5px;
-  }
 
   > h3 {
     width: 150px;
@@ -176,23 +167,13 @@ export const StyledInputBox = styled.div`
     border: 1px solid #878585;
     padding: 10px 20px;
     font-size: 16px;
-    // 뷰포트 너비가 1024px 이하일 때
-    @media (max-width: 1024px) {
-      width: 75%; // 화면이 작을 때는 너비를 줄임
-      font-size: 12px;
-    }
+  }
+  @media (max-width: 1024px) {
+    width: 98%; // 화면이 작을 때는 너비를 줄임
+  }
 
-    // 뷰포트 너비가 768px 이하일 때
-    @media (max-width: 768px) {
-      width: 90%; // 더 작은 화면에서는 더 넓게 설정
-      font-size: 10px;
-    }
-
-    // 뷰포트 너비가 480px 이하일 때
-    @media (max-width: 480px) {
-      width: 100%; // 모바일 화면에서는 최대 너비로 설정
-      font-size: 5px;
-    }
+  @media (max-width: 768px) {
+    width: 90%; // 더 작은 화면에서는 더 넓게 설정
   }
 `;
 export const StyledOrderList = styled.div`

@@ -11,6 +11,7 @@ import Title from "../../components/ui/title/Title.jsx";
 import { ButtonBox, InputBox, AuthButton } from "./Register.style.jsx";
 import PasswordChecker from "./PasswordChecker.jsx";
 import { useLocation } from "react-router-dom";
+import AlertModal from "../../components/ui/alert/AlertModal.jsx";
 
 const initRegisterInfo = {
   name: "",
@@ -23,6 +24,7 @@ const initRegisterInfo = {
 function RegisterForm(props) {
   const [auth, setAuth] = useState(false);
   const [regInfo, setRegInfo] = useState(initRegisterInfo);
+  const [alert, setAlert] = useState(false);
   const location = useLocation().pathname;
 
   const authEmail = useSelector((state) => state.register.email);
@@ -100,8 +102,13 @@ function RegisterForm(props) {
         password,
         phone
       );
-      alert(registerRes);
-      window.close();
+
+      console.log(registerRes);
+      setAlert(true);
+
+      setTimeout(() => {
+        setAlert(false);
+      }, 3000);
     } catch (err) {
       alert("다시 입력 해주세요");
     }
@@ -114,6 +121,7 @@ function RegisterForm(props) {
 
   return (
     <Contents>
+      {alert && <AlertModal>회원가입이 완료되었습니다.</AlertModal>}
       {auth && <AuthEmail onClose={closeAuthModal} />}
       <Title>모두 입력 해주세요.</Title>
       <form onSubmit={handleSubmit}>

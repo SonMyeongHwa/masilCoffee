@@ -7,7 +7,7 @@ import { axiosPatchAdmin } from "../../../../api/user/user";
 
 const UserModal = ({ closeModal, modifyUser }) => {
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.login.token);
+  //const token = useSelector((state) => state.login.token);
   const [userInfo, setUserInfo] = useState({
     name: "",
     email: "",
@@ -39,24 +39,16 @@ const UserModal = ({ closeModal, modifyUser }) => {
     e.preventDefault();
     console.log("userInfo", userInfo);
     const updatedData = {
-      token: token,
       userId: userInfo._id,
       newName: userInfo.name,
       newNickname: userInfo.nickname,
       newPhone: userInfo.phone,
     };
-    console.log("tokendd", updatedData);
+
     const fn = async () => {
       if (modifyUser) {
         try {
-          const updatedUser = await axiosPatchAdmin(
-            updatedData.token,
-            updatedData.userId,
-            updatedData.newName,
-            updatedData.newNickname,
-            updatedData.newPhone
-          );
-          console.log("updatedProduct", updatedUser);
+          const updatedUser = await axiosPatchAdmin(updatedData.userId, updatedData.newName, updatedData.newNickname, updatedData.newPhone);
           dispatch(updateUser(updatedUser));
         } catch (error) {
           console.error("Failed to update product", error);

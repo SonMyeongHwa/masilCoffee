@@ -7,7 +7,7 @@ import { getPayment, deletePayment } from "../../../../api/payment/payment";
 
 function OrderList() {
   const [orders, setOsers] = useState({ orders: []})
-  console.log("state", orders)
+  console.log("state", orders.orders)
 
   useEffect(() => {
     const axiosFn = async () => {
@@ -16,7 +16,7 @@ function OrderList() {
       setOsers(current => {
         return {
           ...current,
-          orders: [res]
+          orders: res
         }
       })
     }
@@ -24,18 +24,9 @@ function OrderList() {
     axiosFn()
   }, [])
 
-  const handleCancel = (orderId) => {
-    axiosCancel(orderId);
-  }
-
-  const axiosCancel = async (orderId) => {
-    await deletePayment(orderId);
-
-  }
-
   return (
     <S.ListBox>
-      <OrderListForm orders={orders.orders} onCancel={handleCancel}/>
+      <OrderListForm orders={orders.orders} />
     </S.ListBox>
   );
 }

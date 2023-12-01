@@ -26,98 +26,61 @@ const board = (state = initialState, action) => {
         searchBoards: [...state.boards, ...action.payload],
       };
 
-    //게시글 검색
-    case BOARD_TYPE.GET_SEARCH_BOARDS:
-      const { boards } = state;
-      const query = action.payload;
-
-      if (query) {
-        //검색 값 O
-        const searchBoard = boards.filter((e) => e.post.search(query) !== -1);
-        return {
-          ...state,
-          searchBoards: searchBoard,
-        };
-      } else {
-        //검색 값 X
-        return {
-          ...state,
-          searchBoards: state.boards,
-        };
-      }
-
-    // //게시물 검색
-    // case BOARD_TYPE.GET_SEARCH_BOARDS:
-    //   const { boards, filters } = state;
-    //   const query = action.payload;
-
-    //   if (!query && filters !== "") {
-    //     //검색쿼리X, 카테고리O
-    //     const filteredCate = boards.filter((e) => e.category === filters);
-    //     return {
-    //       ...state,
-    //       searchBoards: filteredCate,
-    //     };
-    //   } else if (!query && filters === "") {
-    //     //검색쿼리X, 카테고리X
-    //     return {
-    //       ...state,
-    //       searchBoards: boards,
-    //     };
-    //   } else if (query && filters === "") {
-    //     //검색쿼리O, 카테고리X
-    //     const searchBoard = boards.filter((e) => e.post.search(query) !== -1);
-    //     return {
-    //       ...state,
-    //       searchBoards: searchBoard,
-    //     };
-    //   }
-    //   const filteredData = filterFn(filters, query, boards); //검색쿼리O, 카테고리O
-
-    //   return {
-    //     ...state,
-    //     searchBoards: filteredData,
-    //   };
-
-    //해당 게시물 가져오기
-    case BOARD_TYPE.GET_BOARD:
-      return {
-        ...state,
-        board: [action.payload],
-      };
-
     //게시글 작성하기
     case BOARD_TYPE.ADD_BOARD:
       return {
         ...state,
         boards: [...state.boards, action.payload],
+        searchBoards: [...state.boards, action.payload],
       };
 
     //게시글 수정하기
     case BOARD_TYPE.UPDATE_BOARD:
       const updateBoard = action.payload;
-      const updatedBoards = state.boards.map((board) => board._id === updateBoard._id ? updateBoard : board);
+      const updatedBoards = state.boards.map((board) =>
+        board._id === updateBoard._id ? updateBoard : board
+      );
 
       return {
         ...state,
         board: [updateBoard],
         boards: [updatedBoards],
+        searchBoards: [updatedBoards],
       };
 
     //게시글 삭제하기
     case BOARD_TYPE.REMOVE_BOARD:
       const deletedBoardId = action.payload;
-      const filteredBoards = state.boards.filter((board) => board._id !== deletedBoardId);
+      const filteredBoards = state.boards.filter(
+        (board) => board._id !== deletedBoardId
+      );
 
       return {
         ...state,
         boards: [filteredBoards],
+        searchBoards: [filteredBoards],
+      };
+    
+    //좋아요
+    case BOARD_TYPE.UPDATE_LIKE:
+      const { boardId, type } = action.payload;
+      const filteredBoard = state.boards.map((board) => {
+        if (board._id === boardId) {
+          return {
+            ...board,
+            likeCount: type === "create" ? board.likeCount + 1 : board.likeCount - 1,
+            isLiked: type === "create" ? true : false
+          }
+        } return board
+      });
+      
+      return {
+        ...state,
+        boards : filteredBoard,
+        searchBoards : filteredBoard
       };
 
-      case BOARD_TYPE.GET_MY_BOARDS:
-        
-
-    default:
+      default:
       return state;
   }
 };

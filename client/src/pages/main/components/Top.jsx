@@ -17,10 +17,32 @@ const Top = () => {
       if (number3 < 31803) {
         setNumber3((prevNumber) => prevNumber + 2361);
       }
-    }, 50); // 1초 간격
+    }, 50);
 
     return () => clearInterval(interval);
   }, [number1, number2, number3]);
+
+  useEffect(() => {
+    const increaseNumber2 = () => {
+      const randomNumber = Math.round(Math.random() * 10);
+      setNumber2((prevNumber) => prevNumber + randomNumber);
+    };
+
+    const intervalForNumber2 = setInterval(increaseNumber2, 3000);
+
+    return () => clearInterval(intervalForNumber2);
+  }, []);
+
+  useEffect(() => {
+    const increaseNumber3 = () => {
+      const randomNumber = Math.round(Math.random() * 5);
+      setNumber3((prevNumber) => prevNumber + randomNumber);
+    };
+
+    const intervalForNumber3 = setInterval(increaseNumber3, 5000);
+
+    return () => clearInterval(intervalForNumber3);
+  }, []);
 
   return (
     <S.TopImage>
@@ -32,10 +54,10 @@ const Top = () => {
             <S.BigFont>{number1}</S.BigFont>년<S.RoundBox>함께한 시간</S.RoundBox>
           </div>
           <div>
-            <S.BigFont>{number2}</S.BigFont>개<S.RoundBox>총 판매량</S.RoundBox>
+            <S.BigFont>{number2.toLocaleString("en-US")}</S.BigFont>개<S.RoundBox>총 판매량</S.RoundBox>
           </div>
           <div>
-            <S.BigFont>{number3}</S.BigFont>명<S.RoundBox>마실커피 공식 회원</S.RoundBox>
+            <S.BigFont>{number3.toLocaleString("en-US")}</S.BigFont>명<S.RoundBox>마실커피 공식 회원</S.RoundBox>
           </div>
         </S.NumberWrap>
       </S.ContentWrap>

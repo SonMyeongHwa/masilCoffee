@@ -96,12 +96,13 @@ export const CategoryBtn = styled.button`
   cursor: pointer;
   white-space: nowrap;
   transition: background 0.2s, color 0.2s ease, border 0.2s;
-
-  background-color: ${(props) => props.className === "active" ? "#8e0e28" : "#f5f5f5"};
+  
+  background-color: ${(props) => props.className === "active" ? "#472e27" : "#f5f5f5"};
   color: ${(props) => props.className === "active" ? "white" : "black"};
-
+  font-weight: ${(props) => props.className === "active" ? "bold" : "normal"};
+  
   &:hover {
-    background: #8e0e28;
+    background: #472e27;
     color: white;
     border: none;
   }
@@ -143,4 +144,11 @@ export const ShowMore = styled.button`
     background: #4f4f4f;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
+`;
+
+//로딩
+export const Loading = styled.div`
+  text-align: center;
+  margin: 50vh;
+  font-size: 1.2rem;
 `;

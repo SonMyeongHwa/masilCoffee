@@ -12,20 +12,15 @@ export const StyledPaymentcontainer = styled.div`
 export const StyledPaymentBox = styled.div`
   margin-top: 100px;
   margin: 100px auto;
-  width: 80%;
+  width: 100%;
   // 뷰포트 너비가 1024px 이하일 때
   @media (max-width: 1024px) {
-    width: 75%; // 너비를 줄임
+    width: 100%; // 너비를 줄임
   }
 
   // 뷰포트 너비가 768px 이하일 때
   @media (max-width: 768px) {
-    width: 90%; // 더 작은 화면에서는 더 넓게 설정
-  }
-
-  // 뷰포트 너비가 480px 이하일 때
-  @media (max-width: 480px) {
-    width: 100%; // 모바일 화면에서는 최대 너비로 설정
+    width: 100%; // 더 작은 화면에서는 더 넓게 설정
   }
 `;
 
@@ -91,16 +86,14 @@ export const StyledPayment = styled.div`
   text-align: center;
   border-radius: 30px 0px 30px 0px;
 
+  // 뷰포트 너비가 1024px 이하일 때
   @media (max-width: 1024px) {
-    width: 75%; // 화면이 작을 때는 너비를 줄임
+    width: 100%; // 너비를 줄임
   }
 
+  // 뷰포트 너비가 768px 이하일 때
   @media (max-width: 768px) {
-    width: 90%; // 더 작은 화면에서는 더 넓게 설정
-  }
-
-  @media (max-width: 480px) {
-    width: 100%; // 모바일 화면에서는 최대 너비로 설정
+    width: 100%; // 더 작은 화면에서는 더 넓게 설정
   }
 `;
 

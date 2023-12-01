@@ -24,7 +24,9 @@ export const getAllProductsMain = async () => {
 
 export const getCategoryProducts = async (category) => {
   try {
-    const res = await apiInstance.get(`/api/v1/products/categories/${category}`);
+    const res = await apiInstance.get(
+      `/api/v1/products/categories/${category}`
+    );
     if (res?.data?.data) {
       return res.data.data;
     }

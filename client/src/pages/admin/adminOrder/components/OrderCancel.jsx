@@ -7,7 +7,6 @@ import { actionUpdateOrder } from "../../../../redux/action/paymentAction";
 
 const OrderCancel = ({ closeModal, orderId }) => {
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.login.token);
   const [selectedReason, setSelectedReason] = useState("");
   const cancelReasons = ["고객 요청", "재료 소진", "가게 사정"];
 

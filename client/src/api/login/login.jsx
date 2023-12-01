@@ -5,13 +5,11 @@ const logoutUrl = `/api/v1/users/logout`;
 const checkLogin = `/api/v1/users/check-login`;
 
 export const axiosPostLogin = async (email, password) => {
-  const body = { "email": email, "password": password };
-  console.log("body", body)
+  const body = { email: email, password: password };
 
   try {
     const res = await apiInstanceNonAuth.post(loginUrl, body);
-    console.log("asdfasdfa", res)
-    const data = res.data;
+    const data = res?.data;
     return data;
   } catch (error) {
     // 에러가 발생한 경우 에러 메시지를 콘솔에 출력
@@ -26,7 +24,7 @@ export const axiosPostLogout = async (userEmail) => {
 
   try {
     const res = await apiInstance.post(logoutUrl, body);
-    const data = res.data;
+    const data = res?.data;
 
     return data;
   } catch (error) {
@@ -36,10 +34,9 @@ export const axiosPostLogout = async (userEmail) => {
 };
 
 export const getCheckLogin = async () => {
-
   try {
     const res = await apiInstance.get(checkLogin);
-    const data = res.data;
+    const data = res?.data;
 
     return data;
   } catch (error) {

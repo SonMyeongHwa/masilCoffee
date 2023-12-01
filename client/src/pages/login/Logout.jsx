@@ -8,7 +8,6 @@ import Contents from "../../components/ui/contents/Contents.jsx";
 
 import { ROUTES } from "../../router/Routes.jsx";
 import { axiosPostLogout } from "../../api/login/login.jsx";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { actionLogout } from "../../redux/action/login/loginAction.jsx";
 import { removeUser } from "../../redux/action/user/userAction.jsx";

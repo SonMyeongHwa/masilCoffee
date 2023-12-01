@@ -7,18 +7,16 @@ import includeCianPage from "../../../util/includeCianPage";
 import { LuMoveUp } from "react-icons/lu";
 import { media } from "../../../util/mediaQ/media";
 
-
-
 import { HiArrowUp } from "react-icons/hi";
 import { SlBasket } from "react-icons/sl";
 
 export const StyledBanner = styled.div`
   display: flex;
   flex-direction: column;
-
+  position: relative;
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 40px;
+  right: 60px;
 
   cursor: pointer;
 
@@ -36,10 +34,7 @@ export const ControllIcon = styled(MdAddShoppingCart)`
   border-radius: 100px;
   background: ${(props) => backgroundColor(props.location)};
   padding: 12px;
-  color: ${(props) =>
-    IncludeRedPage(props.location)
-      ? txt_color.main_color
-      : txt_color.sub_color};
+  color: ${(props) => (IncludeRedPage(props.location) ? txt_color.main_color : txt_color.sub_color)};
 `;
 export const ControllUp = styled(HiArrowUp)`
   width: 80%;
@@ -47,8 +42,19 @@ export const ControllUp = styled(HiArrowUp)`
   border-radius: 100px;
   background: ${(props) => backgroundColor(props.location)};
   padding: 12px;
-  color: ${(props) =>
-    IncludeRedPage(props.location)
-      ? txt_color.main_color
-      : txt_color.sub_color};
+  color: ${(props) => (IncludeRedPage(props.location) ? txt_color.main_color : txt_color.sub_color)};
+`;
+
+export const CartCount = styled.p`
+  font-size: 18px;
+  font-weight: bold;
+  background-color: white;
+  color: #472e27;
+  width: 26px;
+  border-radius: 50px;
+  text-align: center;
+  position: absolute;
+  top: 40px;
+  left: 30px;
+  background-color: #f5f5f5;
 `;

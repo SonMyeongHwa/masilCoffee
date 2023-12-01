@@ -27,18 +27,18 @@ const ImageSlider = ({ images }) => {
       </StyledSlider>
     </ImageWrap>
   );
-}
+};
 
 export default ImageSlider;
 
 const StyledSlider = styled(Slider)`
   .slick-prev {
     z-index: 1;
-    left: 5px;
+    left: 9%;
   }
 
   .slick-next {
-    right: 15px;
+    right: 8%;
   }
 
   .slick-prev:before,
@@ -76,4 +76,7 @@ const ImageWrap = styled.div`
 const Image = styled.img`
   height: auto; /* 이미지의 높이를 자동으로 조정하여 가로세로 비율을 유지함 */
   aspect-ratio: 1 / 1; /* 이미지의 종횡비를 1:1로 설정하여 정사각형으로 만듦 */
+  width: 100%; /* 이미지의 너비를 컨테이너의 너비에 맞춤 */
+  object-fit: contain; /* 이미지가 컨테이너를 채우도록 하면서 비율 유지 */
+  background-color: white;
 `;

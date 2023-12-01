@@ -67,7 +67,7 @@ export const addBoard = async (formData) => {
 
 //게시글 수정하기
 
-export const updateBoard = async (token, boardId, formData) => {
+export const updateBoard = async (boardId, formData) => {
   console.log(boardId)
 
   try {
@@ -106,7 +106,7 @@ export const deleteBoard = async (boardId) => {
 export const likedBoard = async (boardId) => {
   try {
     const res = await apiInstance.put(`/api/v1/like/${boardId}`, {});
-    console.log("좋아요", res);
+
     const liked = res.data.data.action;
     return liked;
   } catch (error) {

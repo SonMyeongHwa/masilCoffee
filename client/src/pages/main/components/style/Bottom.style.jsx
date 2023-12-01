@@ -3,11 +3,13 @@ import styled from "styled-components";
 export const BottomSlide = styled.div`
   width: 2000px;
   margin: 0 auto;
+  margin-top: 80px;
   background-color: ${(props) => props.$bgColor || "defaultColor"};
 
   .slick-slider {
     width: 2000px;
     overflow-x: hidden;
+    height: 500px;
   }
 
   .slick-track {
@@ -69,14 +71,18 @@ export const BsChat = styled.div`
   }
 `;
 export const TagBox = styled.span`
-  padding: 10px;
+  padding: 10px 15px;
   margin: 0 5px 5px 0;
   border-radius: 30px;
   background-color: white;
   color: black;
   font-size: 0.8rem;
   white-space: nowrap;
-  font-weight: 900;
+  font-weight: 600;
+  height: 10px;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
 `;
 export const TagWrap = styled.div`
   display: flex;
@@ -104,5 +110,10 @@ export const CommentNum = styled.span`
 export const Post = styled.p`
   text-overflow: ellipsis;
   overflow: hidden;
-  white-space: nowrap;
+  height: 50px;
+  width: 380px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
 `;

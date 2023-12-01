@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Paginamtion, PaginationItem } from "../style/CommentList.style";
 import { StyledTable } from "../style/StyledTable";
 import { CommentTitle } from "../style/MyPage.style";
@@ -10,6 +10,13 @@ import DateFormat from "../../../util/DateFormat/DateFormat";
 function WriteListForm({onInsert, data}) {
   const [page, setPage] = useState(1);
   const dateType = "dateTime"
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    if(data.data.length === 0) {
+      setVisible(false)
+    } else {setVisible(true)}
+  }, [])
   
   const numbers = Array.from({length: data.totalpage || 0}, (_, index) => index + 1);
   
@@ -20,9 +27,14 @@ function WriteListForm({onInsert, data}) {
   })
 
 
-  const handleClick = (e) => {
-    setPage(parseInt(e.target.name, 10));
+  const handleClick = (e, arrow) => {
+    if (arrow) {
+      setPage(parseInt(e, 10));
+    } else {
+      setPage(parseInt(e.target.name, 10));
+    }
   };
+
 
 
   useEffect(() => {
@@ -31,11 +43,12 @@ function WriteListForm({onInsert, data}) {
 
   
   return (
-    <div>
+    <Fragment>
       <CommentTitle>내가 작성한 글</CommentTitle>
-      <StyledTable trData={data.trData} tdData={dataSet} />
-      <Paginamtion>
-        <PaginationItem href="#">&laquo;</PaginationItem>
+      {!visible ? <div>작성된 글이 없습니다</div> : <></>}
+      {!visible ? <></> : <StyledTable trData={data.trData} tdData={dataSet} />}
+      {!visible ? <></> : <Paginamtion>
+        <PaginationItem href="#" onClick={() => handleClick(1, "arrow")}>&laquo;</PaginationItem>
         <div>
           {numbers.map(number => {
             return (
@@ -46,9 +59,9 @@ function WriteListForm({onInsert, data}) {
           })}
             
         </div>
-        <PaginationItem href="#">&raquo;</PaginationItem>
-      </Paginamtion>
-    </div>
+        <PaginationItem href="#" onClick={() => handleClick(numbers[numbers.length - 1], "arrow")}>&raquo;</PaginationItem>
+      </Paginamtion>}
+    </Fragment>
   );
 }
 

@@ -16,22 +16,6 @@ export const actionGetAllMoreBoards = (boards) => {
   };
 };
 
-//게시글 검색
-export const actionSearchBoards = (quary) => {
-  return {
-    type: BOARD_TYPE.GET_SEARCH_BOARDS,
-    payload: quary,
-  };
-};
-
-//해당 게시글 가져오기
-export const actionGetBoard = (board) => {
-  return {
-    type: BOARD_TYPE.GET_BOARD,
-    payload: board,
-  };
-}
-
 //게시글 작성하기
 export const actionAddBoard = (board) => {
   return {
@@ -55,3 +39,11 @@ export const actionRemoveBoard = (boardId) => {
     payload: boardId,
   };
 };
+
+//좋아요
+export const actionUpdateLike = (boardId, type) => {
+  return {
+    type: BOARD_TYPE.UPDATE_LIKE,
+    payload: {boardId, type},
+  };
+}

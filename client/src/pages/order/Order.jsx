@@ -43,9 +43,11 @@ const Order = () => {
         console.log(data, "데이터 유저 레시피의");
         console.log(productsFromState, "프로덱트프롬스테이트");
         const getProductName = productsFromState.filter((product) => product.name === data.name);
-        getProductName[0].recipe = data.options;
+        console.log(getProductName, "깊은복사해야되는 데이터");
+        const changeCustomRecipe = [...getProductName];
+        changeCustomRecipe[0].recipe = data.options;
         console.log("겟 프로덕트네임", getProductName);
-        return getProductName[0];
+        return changeCustomRecipe[0];
       });
       console.log("유저의 겟프로덕트스", getProducts);
       setUserCustomRecipe(getProducts);

@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { CategoryWrap, CategoryBtn } from "../Recipe.style";
-import {
-  actionGetFilter,
-  actionRemoveFilter,
-  actionSearchBoards,
-} from "../../../redux/action/boardAction";
 
 const categorysArr = [
   {

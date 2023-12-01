@@ -58,7 +58,7 @@ export const BigFont = styled.span`
 `;
 
 export const RoundBox = styled.div`
-  background-color: #8e0e28;
+  background-color: #231e1c;
   padding: 6px 0;
   width: 220px;
   height: 25px;

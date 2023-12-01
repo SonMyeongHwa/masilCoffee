@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   min-height: 100vh;
   width: 12%;
-  background-color: #8e0e28;
+  background-color: #333333;
 `;
 
 export const Category = styled.div`
@@ -12,7 +12,7 @@ export const Category = styled.div`
   justify-content: space-between;
   padding: 24px 6.8%;
   box-size: border-box;
-  border-bottom: solid 0.8px #650818;
+  border-bottom: solid 0.8px black;
 `;
 
 export const OrderCount = styled.p`

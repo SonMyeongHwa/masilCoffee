@@ -33,6 +33,7 @@ export const PostPre = styled.pre`
   font-size: 1rem;
   white-space: pre-wrap;
   word-break: break-all;
+  font-family: "Noto Sans", sans-serif;
 `;
 
 //댓글, 좋아요 감싸는 div
@@ -70,7 +71,7 @@ export const TagWrap = styled.div`
 export const TagBox = styled.span`
   padding: 1% 2%;
   margin: 0 5px 5px 0;
-  background-color: #8e0e28;
+  background-color: #472e27;
   color: white;
   display: flex;
   align-items: center;
@@ -86,4 +87,16 @@ export const InputStyled = styled.input`
   box-sizing: border-box;
   border: 1px solid #d9d9d9;
   border-radius: 10px;
+`;
+
+//내 작성
+export const MyWritten = styled.span`
+  color: #aa522e;
+  border: 2px solid #aa522e;
+  border-radius: 17px;
+  padding: 1px 5px;
+  box-sizing: border-box;
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-left: 5px;
 `;

@@ -9,7 +9,7 @@ import { updateOption } from "../../../../api/orderOption";
 
 const OptionModal = ({ title, closeModal }) => {
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.login.token);
+  //const token = useSelector((state) => state.login.token);
   const allOptions = useSelector((state) => state.orderOption.options);
   const [selectedOption, setSelectedOption] = useState(null);
   const [inputComponents, setInputComponents] = useState([]);
@@ -101,7 +101,7 @@ const OptionModal = ({ title, closeModal }) => {
 
     const fn = async () => {
       try {
-        const updatedData = await updateOption(allOptions._id, optionApiData, token);
+        const updatedData = await updateOption(allOptions._id, optionApiData);
         dispatch(actionUpdateOption(updatedData));
       } catch (err) {
         console.log("err", err);

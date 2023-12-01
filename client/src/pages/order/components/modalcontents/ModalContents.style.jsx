@@ -5,6 +5,17 @@ export const StyleText = styled.div`
   box-sizing: border-box;
   display: flex;
   width: 510px;
+  /* 모바일 환경을 위한 미디어 쿼리 */
+  @media (max-width: 966px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  /* 탭을 위한 미디어 쿼리 */
+  @media (max-width: 640px) {
+    width: 100%;
+  }
 `;
 export const StyleImg = styled.img`
   width: 255px;
@@ -27,6 +38,12 @@ export const StyleInfo = styled.div`
     font-size: 25px;
     font-weight: 900;
   }
+  /* 모바일 환경을 위한 미디어 쿼리 */
+  @media (max-width: 966px) {
+    > span {
+      padding-top: 20px;
+    }
+  }
 `;
 export const StyleDisplay = styled.div`
   display: flex;
@@ -46,6 +63,21 @@ export const StyleDisplay = styled.div`
     color: white;
   }
 `;
+export const StyleSlideContanier = styled.div`
+  /* 모바일 환경을 위한 미디어 쿼리 */
+  @media (max-width: 926px) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    > div {
+      width: 90%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+`;
+
 export const StylePaddingSpan = styled.div`
   color: #472e27;
   font-size: 20px;
@@ -126,6 +158,15 @@ export const StyleShotModal = styled.div`
     transform: translateY(-100%);
     opacity: 0;
     transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
+  }
+
+  /* 모바일 환경을 위한 미디어 쿼리 */
+  @media (max-width: 998px) {
+    width: 80%;
+  }
+  /* 탭을 위한 미디어 쿼리 */
+  @media (max-width: 640px) {
+    width: 50%;
   }
 `;
 export const StyledTotalPrice = styled.div`

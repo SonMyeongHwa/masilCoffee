@@ -8,7 +8,8 @@ import { getAllProductsMain } from "../../../api/product";
 const MiddleOne = () => {
   const dispatch = useDispatch();
   const allProduct = useSelector((state) => state.product.products);
-  const menuImgArr = allProduct.slice(0, 16).map((product) => {
+  const oddIndexNumbers = allProduct.slice(0, 32).filter((number, index) => index % 2 !== 0);
+  const menuImgArr = oddIndexNumbers.map((product) => {
     return {
       img: product.image_url,
       name: product.name,
@@ -55,7 +56,7 @@ const MiddleOne = () => {
 
   return (
     <MiddleMenu.Container>
-      <MiddleMenu.Title>MENU</MiddleMenu.Title>
+      <MiddleMenu.Title>BEST</MiddleMenu.Title>
       <MiddleMenu.Content>
         <MiddleMenu.StyledSlider {...settings}>
           {menuImgArr.map(({ img, name }, i) => (

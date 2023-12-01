@@ -40,7 +40,6 @@ const Recipe = () => {
       }
     };
     fn();
-    if(currentPage === 1) window.scrollTo(0, 0);
   }, [currentPage, totalPage, category, inputQuery]);
 
   const hanleClick = (event, boardId) => {
@@ -95,17 +94,22 @@ const Recipe = () => {
             setCurrentPage={setCurrentPage}
           />
         </S.Container>
-        {Array.isArray(allBoards) &&
+        {Array.isArray(allBoards) && allBoards.length > 0 ? (
           allBoards.map((post) => (
             <S.PostWrap key={post._id} onClick={(e) => hanleClick(e, post._id)}>
               <PostList post={post} type={"list"} />
             </S.PostWrap>
-          ))}
+          ))
+        ) : (
+          <div style={{ textAlign: "center", marginTop: "20vh" }}>
+            {inputQuery ? "검색 결과가 없습니다." : "게시글이 없습니다."}
+          </div>
+        )}
         <S.ShowMore
           onClick={handleMoreClick}
           disabled={isLoad}
           style={{
-            display: currentPage === totalPage ? "none" : "block",
+            display: currentPage >= totalPage ? "none" : "block",
           }}
         >
           <FaChevronDown style={{ marginRight: "10px" }} />

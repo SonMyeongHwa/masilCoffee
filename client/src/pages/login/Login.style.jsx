@@ -17,7 +17,6 @@ export const InputCard = styled.div`
 `;
 
 export const InputBox = styled.div`
-  width: 900px;
   height: 100px;
 
   border: 1px solid #878585;
@@ -36,12 +35,12 @@ export const InputBox = styled.div`
 
 export const ButtonBox = styled.div`
  display: flex;
- flex-direction: column;
+ flex-direction: row;
 
  justify-content: center;
  align-items: center;
 
- margin-top: 250px;
+ margin-top: 180px;
 `
 
 export const LoginMessage = styled.div`

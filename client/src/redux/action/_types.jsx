@@ -17,15 +17,10 @@ export const OPTION_TYPE = {
 export const BOARD_TYPE = {
   GET_ALL_BOARDS: "get_all_boards",
   GET_ALL_MORE_BOARDS: "get_all_more_boards",
-  GET_SEARCH_BOARDS: "get_search_boards",
-  GET_FILTER_BOARDS: "get_filter_boards",
-  REMOVE_FILTER_BOARDS: "remove_filter_boards",
-  GET_BOARD: "get_board",
-  GET_MY_BOARDS: "get_my_boards",
-  REMOVE_BOARD: "remove_board",
   ADD_BOARD: "add_board",
   UPDATE_BOARD: "update_board",
   DELETE_BOARD: "delete_board",
+  UPDATE_LIKE: "update_like",
 };
 
 export const COMMENT_TYPE = {

@@ -4,7 +4,7 @@ const urladmin = "/api/v1/users/admin";
 export const axiosGetUsers = async () => {
   const res = await apiInstance.get(urladmin);
 
-  const users = res.data.data;
+  const users = res?.data?.data;
 
   return users;
 };
@@ -12,7 +12,5 @@ export const axiosGetUsers = async () => {
 export const axiosPostUser = async (updateUser) => {
   const res = await apiInstance.post(urladmin, updateUser);
 
-  const data = res.data;
-
-  console.log("Updata User:", data);
+  const data = res?.data;
 };

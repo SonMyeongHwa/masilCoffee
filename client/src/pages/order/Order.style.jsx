@@ -46,7 +46,7 @@ export const StyledOrder = styled.div`
         border-right: 1px solid #d9d9d9;
       }
       .selected-button {
-        background-color: #650818;
+        background-color: #472e27;
         color: #f5f5f5;
       }
     }

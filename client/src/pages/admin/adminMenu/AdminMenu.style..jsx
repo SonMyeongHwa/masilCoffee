@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Container = styled.div`
   display: flex;
@@ -35,7 +35,8 @@ export const PaginationItem = styled.a`
   padding: 8px 16px;
   text-decoration: none;
 
-  &:hover {
+  &:hover,
+  &.active {
     background-color: #ffcfd9;
   }
 
@@ -43,4 +44,15 @@ export const PaginationItem = styled.a`
     background-color: #ffcfd9;
     color: black;
   }
+  &:visited {
+    background-color: #ffcfd9;
+    color: black;
+  }
+
+  ${(props) =>
+    props.isActive &&
+    css`
+      background-color: #ffcfd9;
+      color: black;
+    `}
 `;

@@ -5,7 +5,7 @@ import { InputCard } from "../style/InputCard";
 import { BtnConfirm } from "../style/BtnConfirm";
 import { ButtonBox } from "../style/ButtonBox";
 
-import React, { Fragment, useRef } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../router/Routes";
 import { useSelector } from "react-redux";
@@ -17,6 +17,7 @@ import { useParams } from "react-router-dom";
 import { axiosPostLogout } from "../../../api/login/login";
 import { actionLogout } from "../../../redux/action/login/loginAction";
 import { removeUser } from "../../../redux/action/user/userAction";
+import AlertModal from "../../../components/ui/alert/AlertModal";
 
 function ConfirmPassword() {
   const nav = useNavigate();
@@ -26,6 +27,9 @@ function ConfirmPassword() {
   const dispatch = useDispatch();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+
+  const [alert, setAlert] = useState(false);
+  const [txt, setTxt] = useState("");
 
   const axiosPostFn = async (nickname, phone, checkpassword, email) => {
     const userInfo = {
@@ -37,7 +41,15 @@ function ConfirmPassword() {
     try {
       const res = await axiosPatchUser(userInfo);
       await axiosPostLogout(email);
-      alert(res.message);
+      console.log(res)
+
+      setTxt("회원 정보 변경 완료!");
+      setAlert(true);
+      
+      setTimeout(() => {
+        setAlert(false);
+      }, 3000)
+
       dispatch(actionLogout());
       dispatch(removeUser());
       nav(ROUTES.MAIN.path, { replace: true });
@@ -51,10 +63,16 @@ function ConfirmPassword() {
       const res = await axiosDelUser();
       console.log(res);
       await axiosPostLogout(email);
-      alert("회원 삭제 완료!");
+      setTxt("회원 삭제 완료!");
+      setAlert(true);
+      
+      setTimeout(() => {
+        setAlert(false);
+      }, 3000)
+
       dispatch(actionLogout());
       dispatch(removeUser());
-      nav(ROUTES.MAIN.path, { replace: true });
+      nav(ROUTES.MAIN.path);
     } catch (err) {
       console.error(err);
     }
@@ -81,6 +99,7 @@ function ConfirmPassword() {
 
   return (
     <Fragment>
+      {!alert && <AlertModal>{txt}</AlertModal>}
       <Container>
         <Title>
           비밀번호 확인

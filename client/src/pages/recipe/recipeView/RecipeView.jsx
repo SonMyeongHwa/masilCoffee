@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Background, ContainerWrap, Container, Wrap } from "../Recipe.style";
+import { Background, ContainerWrap, Container, Wrap, Loading } from "../Recipe.style";
 import * as S from "./RecipeView.style";
 import PostList from "../components/PostList";
 import PostInput from "../components/PostInput";
@@ -42,6 +42,8 @@ const RecipeView = () => {
       if (status >= 200 && status < 300) {
         const comment = await getComments(boardId); //모든 댓글 가져오기
         setCommentData(comment);
+        const board = await getBoard(boardId, token);
+        setBoardData(board);
       }
     } catch (error) {
       console.error("PostInput 댓글 작성 error", error);
@@ -83,11 +85,15 @@ const RecipeView = () => {
                 />
               ))
             ) : (
-              <div style={{ textAlign: "center" }}>작성된 댓글이 없습니다.</div>
+              <S.TextWrap>
+                <div style={{ textAlign: "center", margin: "30px" }}>
+                  작성된 댓글이 없습니다.
+                </div>
+              </S.TextWrap>
             )}
           </>
         ) : (
-          <div>Loading...</div>
+          <Loading>Loading...</Loading>
         )}
       </ContainerWrap>
     </Background>

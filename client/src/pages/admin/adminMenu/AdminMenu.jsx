@@ -14,7 +14,7 @@ import { getAllProducts, getCategoryProducts, deleteProduct } from "../../../api
 
 const AdminMenu = ({ trData }) => {
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.login.token);
+  //const token = useSelector((state) => state.login.token);
   const allProduct = useSelector((state) => state.product.products);
   const tdData = useSelector((state) => state.product.tableData);
   const [showMenuModal, setShowMenuModal] = useState(false);
@@ -39,8 +39,12 @@ const AdminMenu = ({ trData }) => {
     initDataSet: tdData,
   });
 
-  const handleClick = (e) => {
-    setPage(parseInt(e.target.name, 10));
+  const handleClick = (e, arrow) => {
+    if (arrow) {
+      setPage(parseInt(e, 10));
+    } else {
+      setPage(parseInt(e.target.name, 10));
+    }
   };
 
   useEffect(() => {
@@ -91,7 +95,7 @@ const AdminMenu = ({ trData }) => {
       if (isDeleted) {
         const fn = async () => {
           try {
-            await deleteProduct(selectedProductId, token);
+            await deleteProduct(selectedProductId);
             dispatch(actionDeleteProduct(selectedProductId));
           } catch (err) {
             console.log("err", err);
@@ -146,17 +150,21 @@ const AdminMenu = ({ trData }) => {
           </Menus.TopBox>
           <Table trData={trData} tdData={slicedData} isMenuTable={true} onTdClick={handleTdClick} />
           <Menus.Pagination>
-            <Menus.PaginationItem href="#">&laquo;</Menus.PaginationItem>
+            <Menus.PaginationItem href="#" onClick={() => handleClick(1, "arrow")}>
+              &laquo;
+            </Menus.PaginationItem>
             <div>
               {pageArr.map((arr) => {
                 return (
-                  <Menus.PaginationItem name={arr} href="#" onClick={handleClick}>
+                  <Menus.PaginationItem name={arr} href="#" onClick={handleClick} isActive={page === arr}>
                     {arr}
                   </Menus.PaginationItem>
                 );
               })}
             </div>
-            <Menus.PaginationItem href="#">&raquo;</Menus.PaginationItem>
+            <Menus.PaginationItem href="#" onClick={() => handleClick(pageArr[pageArr.length - 1], "arrow")}>
+              &raquo;
+            </Menus.PaginationItem>
           </Menus.Pagination>
         </Menus.Content>
       </Menus.Container>

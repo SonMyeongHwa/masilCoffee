@@ -1,7 +1,7 @@
 export const back_ground_color = {
   main_color : "#472e27",
   sub_color : "#F5F5F5",
-  admin_color : "#34393E"
+  admin_color : "#472e27"
 }
 
 export const txt_color = {

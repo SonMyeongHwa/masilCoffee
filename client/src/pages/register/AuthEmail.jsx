@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { authEmail, authComplete } from "../../api/register/axiosRegister";
 import { useDispatch } from "react-redux";
 
@@ -7,9 +7,12 @@ import Button from "../../components/ui/button/SquareButton";
 
 import { getAuthEmail } from "../../redux/action/register/register";
 import { AuthItems, AuthTitle, AuthInput, AuthForm } from "./AuthEmail.style";
+import AlertModal from "../../components/ui/alert/AlertModal";
 
 function AuthEmail(props) {
   const [visible, setVisible] = useState(false);
+  const [txt, setTxt] = useState("");
+  const [alert, setAlert] = useState(false);
   const [email, setEmail] = useState("");
   const [num, setNum] = useState(null);
   const dispatch = useDispatch();
@@ -17,6 +20,12 @@ function AuthEmail(props) {
   const emailfn = async (email) => {
     try {
       const res = await authEmail(email);
+      setTxt("이메일을 확인해주세요.");
+      setAlert(true);
+
+      setTimeout(() => {
+        setAlert(false);
+      }, 3000);
       return res;
     } catch (err) {
       alert("없는 이메일 입니다.");
@@ -26,11 +35,14 @@ function AuthEmail(props) {
   const numfn = async (email, code) => {
     try {
       const res = await authComplete(email, code);
-      const confirm = window.confirm(res.message);
+      setTxt("인증이 완료되었습니다.");
+      setAlert(true);
 
-      if (confirm) {
-        dispatch(getAuthEmail(email));
-      }
+      setTimeout(() => {
+        setAlert(false);
+      }, 3000);
+
+      dispatch(getAuthEmail(email));
     } catch (err) {
       console.error(err);
     }
@@ -57,11 +69,8 @@ function AuthEmail(props) {
       e.preventDefault();
       try {
         const res = await actionFn();
-        const confirm = window.confirm(res.message);
 
-        if (confirm) {
-          setVisible(!visible);
-        }
+        setVisible(!visible);
       } catch (err) {
         console.error(err);
       }
@@ -72,35 +81,38 @@ function AuthEmail(props) {
   const submitNum = submitAuth(() => numfn(email, num));
 
   return (
-    <Modal onClose={props.onClose}>
-      <AuthItems>
-        <AuthTitle>이메일 인증</AuthTitle>
-        {!visible ? (
-          <AuthForm onSubmit={submitEmail}>
-            <AuthInput
-              type="text"
-              name="email"
-              value={email}
-              onChange={handleChangeInput}
-              placeholder="abcd@efg.com"
-            />
-            <Button type="red" text="전송" />
-          </AuthForm>
-        ) : (
-          <AuthForm onSubmit={submitNum}>
-            <AuthInput
-              type="number"
-              name="auth"
-              value={num}
-              onChange={handleChangeInput}
-              placeholder="00000"
-            />
-            <Button type="red" text="인증" />
-          </AuthForm>
-        )}
-        <Button onClick={props.onClose} text="나가기" />
-      </AuthItems>
-    </Modal>
+    <Fragment>
+      {alert && <AlertModal>{txt}</AlertModal>}
+      <Modal onClose={props.onClose}>
+        <AuthItems>
+          <AuthTitle>이메일 인증</AuthTitle>
+          {!visible ? (
+            <AuthForm onSubmit={submitEmail}>
+              <AuthInput
+                type="text"
+                name="email"
+                value={email}
+                onChange={handleChangeInput}
+                placeholder="abcd@efg.com"
+              />
+              <Button type="red" text="전송" />
+            </AuthForm>
+          ) : (
+            <AuthForm onSubmit={submitNum}>
+              <AuthInput
+                type="number"
+                name="auth"
+                value={num}
+                onChange={handleChangeInput}
+                placeholder="00000"
+              />
+              <Button type="red" text="인증" />
+            </AuthForm>
+          )}
+          <Button onClick={props.onClose} text="나가기" />
+        </AuthItems>
+      </Modal>
+    </Fragment>
   );
 }
 

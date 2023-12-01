@@ -3,13 +3,13 @@ import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import * as S from "../components/style/Bottom.style";
-import SquareButton from "../../../components/ui/button/SquareButton";
 import { BsChat } from "react-icons/bs";
 import { GoHeart, GoHeartFill } from "react-icons/go";
 import { getAllBoards } from "../../../api/board";
 import { useDispatch, useSelector } from "react-redux";
 import { actionGetAllBoards } from "../../../redux/action/boardAction";
 import RandomColor from "../../../util/RandomColor/RandomColor";
+import { HiHashtag } from "react-icons/hi2";
 
 const Bottom = () => {
   const dispatch = useDispatch();
@@ -59,77 +59,8 @@ const Bottom = () => {
     autoplaySpeed: 0, // 자동 슬라이드 간격
     cssEase: "linear", // 일정한 속도로 움직이도록 설정
   };
-  // const slideData = [
-  //   {
-  //     id: "1",
 
-  //     communityText:
-  //       "커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.",
-  //   },
-  //   {
-  //     id: "2",
-
-  //     communityText:
-  //       "커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.",
-  //   },
-  //   {
-  //     id: "3",
-
-  //     communityText:
-  //       "커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.",
-  //   },
-  //   {
-  //     id: "4",
-
-  //     communityText:
-  //       "커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.",
-  //   },
-  //   {
-  //     id: "5",
-
-  //     communityText:
-  //       "커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.",
-  //   },
-  //   {
-  //     id: "6",
-
-  //     communityText:
-  //       "커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.",
-  //   },
-  //   {
-  //     id: "7",
-
-  //     communityText:
-  //       "커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.",
-  //   },
-  //   {
-  //     id: "8",
-
-  //     communityText:
-  //       "커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.",
-  //   },
-  //   {
-  //     id: "9",
-
-  //     communityText:
-  //       "커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.",
-  //   },
-  //   {
-  //     id: "10",
-
-  //     communityText:
-  //       "커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.커뮤니티에 작성한 글이 보여집니다.",
-  //   },
-  // ];
-
-  // communityText를 57자 이하로 제한하는 함수
-  // const truncateText = (text, maxLength) => {
-  //   return text.length > maxLength
-  //     ? text.substring(0, maxLength) + "..."
-  //     : text;
-  // };
-  // 고정된 배경색을 사용
-  const fixedBackgroundColor = "#8e0e28";
+  const fixedBackgroundColor = "#6d3535 ";
   const [backgroundColor, setBackgroundColor] = useState("");
   useEffect(() => {
     const hue = Math.floor(Math.random() * 360);
@@ -144,13 +75,10 @@ const Bottom = () => {
           allBoards.boards.map((board, index) => {
             // console.log("Board ID:", board._id);
             const isOdd = index % 2 === 0;
-            const boxBgColor = isOdd ? "#d9d9d9" : fixedBackgroundColor; // 홀수이면 그레이, 아니면 기존 색상
+            const boxBgColor = isOdd ? "#9f9f9f" : fixedBackgroundColor; // 홀수이면 그레이, 아니면 기존 색상
 
             return (
-              <S.Bottom
-                key={board._id}
-                onClick={() => handleBoardClick(board._id)}
-              >
+              <S.Bottom key={board._id} onClick={() => handleBoardClick(board._id)}>
                 <S.BottomBox $bgColor={boxBgColor} isEven={isOdd}>
                   <div>
                     <b>{board.nickname}</b>
@@ -172,6 +100,7 @@ const Bottom = () => {
                                 color: "black",
                               }}
                             >
+                              <HiHashtag />
                               {board.tags[i]}
                             </S.TagBox>
                           );
@@ -185,11 +114,7 @@ const Bottom = () => {
                   </S.TagWrap>
                   <S.CommentWrap>
                     <S.LikedWrap>
-                      {board.isLiked ? (
-                        <GoHeartFill style={{ fontSize: "1.4rem" }} />
-                      ) : (
-                        <GoHeart style={{ fontSize: "1.4rem" }} />
-                      )}
+                      {board.isLiked ? <GoHeartFill style={{ fontSize: "1.4rem" }} /> : <GoHeart style={{ fontSize: "1.4rem" }} />}
                       <S.CommentNum>{board.likeCount}</S.CommentNum>
                     </S.LikedWrap>
                     <BsChat

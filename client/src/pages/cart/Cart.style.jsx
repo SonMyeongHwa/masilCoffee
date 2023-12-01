@@ -27,7 +27,7 @@ export const StyledPaymentBox = styled.div`
 
   // 뷰포트 너비가 768px 이하일 때
   @media (max-width: 930px) {
-    width: 90%; // 더 작은 화면에서는 더 넓게 설정
+    width: 100%; // 더 작은 화면에서는 더 넓게 설정
   }
 
   // 뷰포트 너비가 480px 이하일 때
@@ -69,11 +69,11 @@ export const StyledPayment = styled.div`
   border-radius: 30px 0px 30px 0px;
 
   @media (max-width: 1024px) {
-    width: 75%; // 화면이 작을 때는 너비를 줄임
+    width: 100%; // 화면이 작을 때는 너비를 줄임
   }
 
   @media (max-width: 768px) {
-    width: 90%; // 더 작은 화면에서는 더 넓게 설정
+    width: 100%; // 더 작은 화면에서는 더 넓게 설정
   }
 
   @media (max-width: 480px) {
@@ -112,6 +112,13 @@ export const StyledAmountPayment = styled.div`
       color: #472e27;
     }
   }
+  > div > div > button {
+    margin: 10px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
   > i {
     display: block;
     width: 100%;
@@ -121,6 +128,10 @@ export const StyledAmountPayment = styled.div`
 `;
 export const StyledButton = styled.div`
   display: flex;
+  @media (max-width: 640px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 export const StyleTotalText = styled.div`
   display: flex;

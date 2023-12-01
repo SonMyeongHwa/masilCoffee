@@ -19,6 +19,7 @@ export const FileNameWrap = styled.span`
 `;
 
 export const TextArea = styled.textarea`
+  font-family: "Noto Sans", sans-serif;
   box-sizing: border-box;
   width: 100%;
   height: auto;
@@ -36,13 +37,13 @@ export const ImageContainer = styled.div`
   position: relative;
   width: 100%;
   max-width: 150px;
-  margin-right: ${(props) => (props.imagesCount < 4 ? "5%" : "0")};
+  margin-right: ${(props) => (props.imagescount < 4 ? "5%" : "0")};
 `;
 
 export const ImageWrap = styled.div`
   display: flex;
   justify-content: ${(props) =>
-    props.imagesCount < 4 ? "flex-start" : "space-between"};
+    props.imagescount < 4 ? "flex-start" : "space-between"};
   margin: 15px 0;
 `;
 

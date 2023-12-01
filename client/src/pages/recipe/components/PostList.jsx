@@ -12,6 +12,7 @@ import { deleteBoard } from "../../../api/board";
 import { actionRemoveBoard } from "../../../redux/action/boardAction";
 import { likedBoard } from "../../../api/board";
 import { HiHashtag } from "react-icons/hi2";
+import { actionUpdateLike } from "../../../redux/action/boardAction";
 
 const PostList = ({ post, type }) => {
   const navigate = useNavigate();
@@ -30,7 +31,8 @@ const PostList = ({ post, type }) => {
         const likedCheck = await likedBoard(post._id);
         if (likedCheck === "create" || likedCheck === "delete") {
           setLiked((prevLiked) => !prevLiked);
-          setLikeCount((prevCount) => (liked ? prevCount - 1 : prevCount + 1));
+          setLikeCount((prevCount) => (liked ? prevCount - 1 : prevCount + 1)); 
+          dispatch(actionUpdateLike(post._id, likedCheck));
         }
       } catch (error) {
         console.error("RecipeWrite.jsx - update", error);
@@ -63,6 +65,7 @@ const PostList = ({ post, type }) => {
         <Container>
           <div>
             <S.PostNickname>{post.nickname}</S.PostNickname>
+            {post.user === userId && <S.MyWritten>내 글</S.MyWritten>}
             <S.PostDate>{createDate}</S.PostDate>
             {type === "view" && post.user === userId && (
               <S.EditDeleteWrap>

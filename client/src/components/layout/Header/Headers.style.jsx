@@ -94,6 +94,8 @@ display: block;
 `;
 
 export const LinkBox = styled.div`
+    
+
   display: flex;
   ${media.medium`
     display: none;

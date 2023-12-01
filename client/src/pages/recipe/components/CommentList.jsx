@@ -59,6 +59,7 @@ const CommentList = ({ comment, onComment }) => {
       <Container>
         <div>
           <S.PostNickname>{comment.nickname}</S.PostNickname>
+          {comment.author._id === userId && <S.MyWritten>내 댓글</S.MyWritten>}
           <S.PostDate>{createDate}</S.PostDate>
           {!isEditing && comment.author._id === userId && (
             <S.EditDeleteWrap>
@@ -89,9 +90,7 @@ const CommentList = ({ comment, onComment }) => {
               />
             </div>
           ) : (
-            <div style={{ margin: "15px 0" }}>
-              {comment.comment}
-            </div>
+            <div style={{ margin: "15px 0" }}>{comment.comment}</div>
           )}
         </div>
       </Container>

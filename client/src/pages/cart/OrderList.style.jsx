@@ -31,6 +31,10 @@ export const StyledOrderListMenuBox = styled.div`
     font-size: 20px;
     font-weight: 600;
   }
+  @media (max-width: 640px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const StyledOrderOptionBox = styled.div`

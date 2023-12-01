@@ -103,13 +103,13 @@ const PostFile = ({ images, setImages, defaultValue }) => {
         onChange={handleChange}
         ref={fileInput}
       />
-      <S.ImageWrap imagesCount={fileImages.length}>
+      <S.ImageWrap imagescount={fileImages.length}>
         {fileImages.map((image, index) => (
-          <S.ImageContainer key={index} imagesCount={fileImages.length}>
+          <S.ImageContainer key={index} imagescount={fileImages.length}>
             <S.Image
               alt={image.fileName}
               src={image.dataURL}
-              imagesCount={fileImages.length}
+              imagescount={fileImages.length}
             />
             <AiTwotoneCloseCircle
               onClick={() => handleImageDelete(index)}
