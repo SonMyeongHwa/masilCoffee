@@ -3,13 +3,6 @@ const apiInstance = axios.create({
   baseURL: "http://kdt-sw-6-team03.elicecoding.com",
 });
 
-console.log(
-  "process.env.REACT_APP_SERVER_URL",
-  process.env.REACT_APP_SERVER_URL
-);
-
-console.log("process.env", process.env);
-
 apiInstance.interceptors.request.use(
   (config) => {
     config.headers["Authorization"] = `Bearer ${localStorage.getItem("token")}`;
