@@ -16,7 +16,9 @@ function WriteListForm({onInsert, data}) {
     if(data.data.length === 0) {
       setVisible(false)
     } else {setVisible(true)}
-  }, [])
+  }, [data])
+
+  console.log(data.data.length)
   
   const numbers = Array.from({length: data.totalpage || 0}, (_, index) => index + 1);
   

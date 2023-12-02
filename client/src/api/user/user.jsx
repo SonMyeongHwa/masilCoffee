@@ -1,6 +1,7 @@
 import { apiInstance } from "../interceptor/apiInstance";
 const urlAdmin = "/api/v1/users/admin";
 const urluser = "/api/v1/users";
+const urlToken = "/api/v1/users/check-login";
 
 //common user
 export const axiosGetUser = async () => {
@@ -75,4 +76,22 @@ export const axiosDelAdmin = async (userId) => {
   const delAdim = res?.data?.data;
 
   return delAdim;
+};
+
+
+//토큰 확인
+export const axiosTokenConfirm = async () => {
+  try {
+    const res = await apiInstance.get(urlToken);
+
+    const user = res.data.isLoggedIn;
+    console.log("user", user)
+  
+    return user;
+
+  } catch (err) {
+    console.error(err)
+  }
+  
+
 };

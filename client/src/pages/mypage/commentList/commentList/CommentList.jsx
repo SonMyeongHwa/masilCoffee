@@ -15,7 +15,7 @@ function CommentList({ trData, tdData }) {
     if(tdData.length === 0) {
       setVisible(false)
     } else {setVisible(true)}
-  }, [])
+  }, [tdData])
 
   const pageConst = {
     totalCount: tdData.length,
