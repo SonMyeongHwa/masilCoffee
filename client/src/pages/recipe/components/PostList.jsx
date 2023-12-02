@@ -12,38 +12,37 @@ import { deleteBoard } from "../../../api/board";
 import { actionRemoveBoard } from "../../../redux/action/boardAction";
 import { likedBoard } from "../../../api/board";
 import { HiHashtag } from "react-icons/hi2";
-import { actionUpdateLike } from "../../../redux/action/boardAction";
 
 const PostList = ({ post, type }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.user.user_id); //로그인 한 유저 아이디
   const token = useSelector((state) => state.login.token);
-  const [liked, setLiked] = useState(post.isLiked);
+  const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(post.likeCount);
   const createDate = DateFormat("dateTime", post.createdAt);
 
   const handleLikedClick = async (event) => {
     event.stopPropagation();
 
-    if (token) { //좋아요는 회원만 누를 수 있도록
+    if (token) {
+      //좋아요는 회원만 누를 수 있도록
       try {
         const likedCheck = await likedBoard(post._id);
         if (likedCheck === "create" || likedCheck === "delete") {
           setLiked((prevLiked) => !prevLiked);
-          setLikeCount((prevCount) => (liked ? prevCount - 1 : prevCount + 1)); 
-          dispatch(actionUpdateLike(post._id, likedCheck));
+          setLikeCount((prevCount) => (liked ? prevCount - 1 : prevCount + 1));
         }
       } catch (error) {
         console.error("RecipeWrite.jsx - update", error);
       }
-    };
+    }
   };
 
   //게시글 삭제
   const handleDelete = (event, boardId) => {
     event.preventDefault();
-    
+
     if (window.confirm("게시글을 삭제하시겠습니까?")) {
       const fn = async () => {
         try {
@@ -52,12 +51,12 @@ const PostList = ({ post, type }) => {
         } catch (error) {
           console.error("PostList.jsx-", error);
         }
-      }
+      };
       fn();
 
-      navigate("/Recipe")
+      navigate("/Recipe");
     }
-  }
+  };
 
   return (
     <>
@@ -65,7 +64,6 @@ const PostList = ({ post, type }) => {
         <Container>
           <div>
             <S.PostNickname>{post.nickname}</S.PostNickname>
-            {post.user === userId && <S.MyWritten>내 글</S.MyWritten>}
             <S.PostDate>{createDate}</S.PostDate>
             {type === "view" && post.user === userId && (
               <S.EditDeleteWrap>

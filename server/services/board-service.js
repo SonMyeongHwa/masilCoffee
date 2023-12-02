@@ -36,7 +36,6 @@ class BoardService {
       if (search && search.length < 2) {
         throw new Error("검색어는 두 글자 이상 입력해야 합니다.");
       }
-
       let query = {};
       if (search) {
         const tagSearch = { tags: { $in: [search] } };
