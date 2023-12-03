@@ -1,4 +1,4 @@
-const User = require("../models/user-schema");
+const { User } = require("../models/user-schema");
 const { sendMail } = require("../utils/email-send");
 const bcrypt = require("bcrypt");
 
@@ -11,61 +11,23 @@ class UserService {
   };
 
   // 이메일 인증 코드 발송
-  async transportVerificationCode(email) {
-    try {
-      const checkEmail = await User.findOne({ email });
-      if (checkEmail) {
-        return { success: false, message: "이미 가입된 이메일입니다." };
-      }
-
-      const verificationCode = this.generateRandomNum(11111, 99999);
-      const mailResult = await sendMail(email, verificationCode);
-
-      if (mailResult.success) {
-        const { sentTime, expireTime } = mailResult;
-
-        this.emailVerificationcode[email] = {
-          code: verificationCode,
-          sentTime: sentTime,
-          expireTime: expireTime,
-        };
-        return {
-          success: true,
-          message: "인증 코드가 성공적으로 전송되었습니다.",
-        };
-      } else {
-        console.error("이메일 발송 실패:", mailResult.message);
-        return { success: false, message: "인증 코드 전송에 실패했습니다." };
-      }
-    } catch (error) {
-      console.error("인증 코드 전송 중 오류 발생:", error);
-      return { success: false, message: "인증 코드 전송에 실패했습니다." };
+  async transportVerificationCode(email, res) {
+    const checkEmail = await User.findOne({ email });
+    if (checkEmail) {
+      throw new Error("이미 가입된 이메일 입니다.");
     }
+
+    const verificationCode = this.generateRandomNum(11111, 99999);
+    this.emailVerificationcode[email] = verificationCode;
+    await sendMail(res, email, this.emailVerificationcode[email]);
   }
 
   async verifyCode(email, code) {
     const savedCode = this.emailVerificationcode[email];
-    if (savedCode && savedCode.code === code) {
-      const currentTime = new Date();
-      const elapsedTime = currentTime - savedCode.sentTime;
-
-      if (elapsedTime <= savedCode.expireTime) {
-        // 유효 시간 내 코드 확인 o
-        delete this.emailVerificationcode[email];
-        return {
-          success: true,
-          message: "이메일 인증이 성공적으로 완료되었습니다.",
-        };
-      } else {
-        // 시간 만료
-        return {
-          success: false,
-          message: "인증 코드의 유효 시간이 만료되었습니다.",
-        };
-      }
+    if (savedCode === code) {
+      delete this.emailVerificationcode[email];
     } else {
-      // 코드 다름
-      return { success: false, message: "인증 코드가 일치하지 않습니다." };
+      throw new Error("유효하지 않은 코드입니다.");
     }
   }
 
@@ -127,7 +89,7 @@ class UserService {
       new: true,
       runValidators: true,
     });
-    if (!user) {
+    if(!user){
       throw new Error("해당하는 유저를 찾을 수 없습니다.");
     }
     return user;
@@ -139,16 +101,6 @@ class UserService {
       throw { status: 404, message: "User not found" };
     }
     return user;
-  }
-
-  // 비밀번호 x , 꿀조합 수정
-  async updateUserRecipe(userId, userData) {
-    try {
-      const updatedUser = await User.findByIdAndUpdate(userId, { $set: userData }, { new: true });
-      return updatedUser;
-    } catch (error) {
-      throw error;
-    }
   }
 }
 

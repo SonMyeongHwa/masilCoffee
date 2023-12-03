@@ -4,28 +4,18 @@ const { Schema } = mongoose;
 
 const CommentSchema = new Schema(
   {
+    comment: {
+      type: String,
+      required: false,
+    },
     board: {
       type: Schema.Types.ObjectId,
       ref: "Board",
       required: true,
     },
-    author: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: true
-    },
-    nickname: {
-      type: String,
-      required: true,
-    },
-    comment: {
-      type: String,
-      required: true,
-    }
   },
   {
     timestamps: true,
-    versionKey: false,
   }
 );
 
