@@ -1,18 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import LeftSideItem from "./heander_item/LeftSideItem";
+import TransComponent from "./heander_item/TransComponent";
+
+import { Header, MiniLogo, HeaderBtn } from "./Headers.style";
+import { ROUTES } from "../../../router/Routes";
+import { useSelector } from "react-redux";
+import { TfiMenu } from "react-icons/tfi";
+import Menu from "./util/Menu";
 import { useNavigate } from "react-router-dom";
 
-import LinkTo from "../../ui/Link/LinkTo";
-
-import { Header, LeftSide, RightSide, HeaderImg } from "./Headers.style";
-import { ROUTES } from "../../../router/Routes";
-import IncludeRedPage from "../../../util/IncludeRedPage";
-
 const linkDatas = {
-  right_side: [
+  non_user_right: [
     {
-      to: ROUTES.LOGIN.path,
-      name: "로그인",
+      to: ROUTES.REGISTER.path,
+      name: "회원가입",
     },
+  ],
+  right_side: [
     {
       to: ROUTES.REGISTER.path,
       name: "회원가입",
@@ -35,44 +39,38 @@ const linkDatas = {
 };
 
 function Headers(props) {
-  const style = {
-    textDecoration: "none",
-    textAlign: "center",
-    color: `${IncludeRedPage(props.location) ? "#191414" : "#f5f5f5"}`,
-    fontSize: "15px",
-    fontWeight: "400",
-    margin: "27px",
-  };
-
-  const transLogo = IncludeRedPage(props.location)
-    ? "/assets/images/Logo_White.png"
-    : "/assets/images/Logo_Red.png";
-
-  const nav = useNavigate();
+  const role = useSelector((state) => state.login.role);
+  const [visible, setVisible] = useState(false);
+  const nav = useNavigate()
 
   const handleClick = () => {
-    nav(ROUTES.MAIN.path, { replace: false });
+    setVisible(!visible);
   };
+
+  const onVisible = () => {
+    setVisible(!visible);
+  };
+  const handleClickMiniLogo = () => {
+    nav(ROUTES.MAIN.path);
+    (window.location || document.location).reload();
+  }
 
   return (
     <div>
       <Header location={props.location}>
-        <LeftSide>
-          <HeaderImg src={transLogo} onClick={handleClick} />
-          {linkDatas.left_side.map((link) => {
-            return (
-              <LinkTo there={{ to: link.to, name: link.name }} style={style} />
-            );
-          })}
-        </LeftSide>
-        <RightSide>
-          {linkDatas.right_side.map((link) => {
-            return (
-              <LinkTo there={{ to: link.to, name: link.name }} style={style} />
-            );
-          })}
-        </RightSide>
+        <MiniLogo src="\assets\images\Logo.png" onClick={handleClickMiniLogo}/>
+        <LeftSideItem item={linkDatas.left_side} location={props.location} />
+        <TransComponent
+          userRole={role}
+          linkDatas={linkDatas}
+          location={props.location}
+          onVisible={onVisible}
+        />
+        <HeaderBtn location={props.location} onClick={handleClick}>
+          <TfiMenu />
+        </HeaderBtn>
       </Header>
+      {!visible ? <></> : <Menu role={role} />}
     </div>
   );
 }

@@ -1,34 +1,67 @@
-import axios from "axios";
+import { apiInstance, apiInstanceForm } from "./interceptor/apiInstance";
 
 export const getAllProducts = async () => {
-  const res = await axios.get("http://localhost:5000/api/v1/products");
-  const products = res.data.data;
+  try {
+    const res = await apiInstance.get("/api/v1/products");
+    if (res?.data?.data?.data) {
+      return res.data.data.data;
+    }
+  } catch (err) {
+    console.log("getAllProduct-err", err);
+  }
+};
 
-  return products;
+export const getAllProductsMain = async () => {
+  try {
+    const res = await apiInstance.get("/api/v1/products/main");
+    if (res?.data?.data) {
+      return res.data.data;
+    }
+  } catch (err) {
+    console.log("getAllProductsMain-err", err);
+  }
+};
+
+export const getCategoryProducts = async (category) => {
+  try {
+    const res = await apiInstance.get(
+      `/api/v1/products/categories/${category}`
+    );
+    if (res?.data?.data) {
+      return res.data.data;
+    }
+  } catch (err) {
+    console.log("getCategoryProducts-err", err);
+  }
 };
 
 export const createProduct = async (data) => {
-  console.log("form", data);
-  const res = await axios.post("http://localhost:5000/api/v1/products", data).then((res) => res.data);
-  const newProduct = res.data.data;
-
-  console.log("create", res, newProduct);
-
-  return newProduct;
+  try {
+    const res = await apiInstanceForm.post("/api/v1/products/", data);
+    if (res?.data?.data) {
+      return res.data.data;
+    }
+  } catch (err) {
+    console.log("createProduct-err", err);
+  }
 };
 
 export const updateProduct = async (id, data) => {
-  const res = await axios.put(`http://localhost:5000/api/v1/products/${id}`, data);
-  const products = res.data.data;
-
-  return products;
+  try {
+    console.log("id", id);
+    const res = await apiInstanceForm.put(`/api/v1/products/${id}`, data);
+    if (res?.data?.data) {
+      return res.data.data;
+    }
+  } catch (err) {
+    console.log("updateProduct-err", err);
+  }
 };
 
 export const deleteProduct = async (id) => {
-  const res = await axios.delete(`http://localhost:5000/api/v1/products/${id}`);
-  const products = res.data.data;
-
-  console.log("deleted", res, products);
-
-  return products;
+  try {
+    await apiInstance.delete(`/api/v1/products/${id}`);
+  } catch (err) {
+    console.log("deleteProduct-err", err);
+  }
 };

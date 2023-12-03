@@ -1,41 +1,52 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
 const OrderOptionSchema = new Schema(
-    {
-        shot: {
-            type: Number,
-            required: true,
-        },
-        drizzle: [{
-            type: String,
-            required: false,
-        }],
-        iceAmount: {
-            type: String,
-            enum: ["조금", "보통", "많이"],
-            default: "보통",
-        },
-        whipping: {
-            type: String,
-            enum: ["조금", "보통", "많이"],
-            default: "보통",
-        },
-        syrup: [{
-            type: String,
-            required: false,
-        }],
-        milk: [{
-            type: String,
-            required: false,
-        }],
-    },
-    {
-        timestamps: true,
-    }
+  {
+    shot: [
+      {
+        name: String,
+        price: Number,
+      },
+    ],
+    drizzle: [
+      {
+        name: String,
+        price: Number,
+      },
+    ],
+    iceAmount: [
+      {
+        name: String,
+        price: Number,
+      },
+    ],
+    whipping: [
+      {
+        name: String,
+        price: Number,
+      },
+    ],
+    syrup: [
+      {
+        name: String,
+        price: Number,
+      },
+    ],
+    milk: [
+      {
+        name: String,
+        price: Number,
+      },
+    ],
+  },
+  {
+    timestamps: true,
+    versionKey: false,
+  }
 );
 
-const OrderOption = mongoose.model('OrderOption', OrderOptionSchema);
+const OrderOption = mongoose.model("OrderOption", OrderOptionSchema);
 
 module.exports = OrderOption;

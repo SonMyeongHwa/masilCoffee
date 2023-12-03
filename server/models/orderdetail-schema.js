@@ -35,6 +35,7 @@ const OrderDetailSchema = new Schema(
     },
     {
         timestamps: true,
+        versionKey: false,
     }
 );
 

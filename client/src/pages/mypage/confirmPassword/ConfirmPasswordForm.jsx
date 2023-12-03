@@ -21,6 +21,8 @@ function ConfirmPasswordForm({ email, password }) {
     },
   ];
 
+  
+
   return (
     <div>
       <CenterBox>

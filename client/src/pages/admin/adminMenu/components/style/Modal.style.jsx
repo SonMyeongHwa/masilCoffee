@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import { CiCirclePlus } from "react-icons/ci";
 import { CiCircleMinus } from "react-icons/ci";
+import GetAllOption from "../GetAllOption";
 
 export const ModalBackground = styled.div`
   display: flex;
@@ -66,14 +67,16 @@ export const DetailInputBox = styled.div`
   justify-content: space-between;
   align-items: flex-end;
   margin: 10px 0;
+  // padding-bottom: 10px;
+  // border-bottom: 2px solid #cbcbcb;
 `;
 
 export const OptionP = styled.div`
-  display: block;
+  display: flex;
   margin-right: 20px;
 
   > Input {
-    width: 200px;
+    width: 110px;
   }
 `;
 
@@ -88,7 +91,7 @@ export const AddInput = styled.div`
 `;
 
 export const PlusIcon = styled(CiCirclePlus)`
-  font-size: 40px;
+  font-size: 32px;
 `;
 
 export const MinusIcon = styled(CiCircleMinus)`
@@ -98,13 +101,20 @@ export const MinusIcon = styled(CiCircleMinus)`
 export const OptionSubmit = styled.button`
   width: 120px;
   height: 30px;
-  background-color: #cbcbcb;
   border: none;
   color: white;
   text-align: center;
   font-size: 14px;
   margin: 20px auto 0;
   display: block;
+  background-color: #fc5b5b;
+  border-radius: 3px;
+  border: none;
+  transition: background-color 0.3s, opacity 0.3s;
+
+  &:hover {
+    background-color: #e24242;
+  }
 `;
 
 // ----------------------Option Modal -------------------
@@ -245,4 +255,8 @@ export const Submit = styled.button`
   &:hover {
     background-color: #d12b4d;
   }
+`;
+
+export const AllOption = styled(GetAllOption)`
+  margin: 20px;
 `;

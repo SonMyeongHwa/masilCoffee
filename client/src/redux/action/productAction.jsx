@@ -7,6 +7,13 @@ export const actionGetAllProducts = (products) => {
   };
 };
 
+export const actionGetCategoryProducts = (products) => {
+  return {
+    type: PRODUCT_TYPE.GET_CATEGORY_PRODUCTS,
+    payload: products,
+  };
+};
+
 export const actionCreateProduct = (newProduct) => {
   return {
     type: PRODUCT_TYPE.ADD_PRODUCT,
