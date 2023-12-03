@@ -11,11 +11,11 @@ export const StyledButton = styled.button`
 
   &.Button_grey {
     background-color: #ececec;
-    color: #650818;
+    color: #472e27 ;
     font-weight: bold;
   }
   &.Button_red {
-    background-color: #650818;
+    background-color: #472e27 ;
     color: white;
     font-weight: bold;
   }

@@ -1,99 +1,150 @@
-import React, { useRef } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
+import { axiosRegister } from "../../api/register/axiosRegister.jsx";
+import AuthEmail from "./AuthEmail.jsx";
+
 import Contents from "../../components/ui/contents/Contents";
 import Input from "../../components/ui/Input/Input";
 import Button from "../../components/ui/button/Button.jsx";
+import Title from "../../components/ui/title/Title.jsx";
+import { ButtonBox, InputBox, AuthButton } from "./Register.style.jsx";
+import PasswordChecker from "./PasswordChecker.jsx";
+import { useLocation } from "react-router-dom";
+import AlertModal from "../../components/ui/alert/AlertModal.jsx";
 
-import { ButtonBox, InputBox } from "./Register.style.jsx";
+const initRegisterInfo = {
+  name: "",
+  email: "",
+  nickname: "",
+  phone: "",
+  password: "",
+};
 
+function RegisterForm(props) {
+  const [auth, setAuth] = useState(false);
+  const [regInfo, setRegInfo] = useState(initRegisterInfo);
+  const [alert, setAlert] = useState(false);
+  const location = useLocation().pathname;
 
-const InputInfo = [
-  {
-    name: "이름",
-    type: "text",
-    id: "name",
-    placeholder: "이름을 입력해주세요",
-    doublecheck: true,
-  },
-  {
-    name: "이메일",
-    type: "email",
-    id: "email",
-    placeholder: "이메일 형식을 지켜주세요(abcd@QQQ.com)",
-    doublecheck: true,
-  },
-  {
-    name: "닉네임",
-    type: "text",
-    id: "nkname",
-    placeholder: "닉네임을 입력해주세요",
-    doublecheck: false,
-  },
-  {
-    name: "전화번호",
-    type: "tel",
-    id: "tel",
-    placeholder: "전화번호를 입력해주세요",
-    doublecheck: false,
-  },
-  {
-    name: "비밀번호",
-    type: "password",
-    id: "password",
-    placeholder: "비밀번호를 입력해주세요",
-    doublecheck: false,
-  },
-  {
-    name: "비밀번호 확인",
-    type: "password",
-    id: "password",
-    placeholder: "비밀번호 확인을 위해 한번 더 비밀번호를 입력해주세요",
-    doublecheck: false,
-  },
-];
+  const authEmail = useSelector((state) => state.register.email);
 
-function RegisterForm() {
-  const emailRef = useRef(null);
-  const passwordRef = useRef(null);
+  useEffect(() => {
+    setRegInfo((current) => {
+      return {
+        ...current,
+        email: authEmail,
+      };
+    });
+  }, [auth]);
 
-  const DoubleCheck = (props) => {
-
-    const handleClick = () => {
-      
+  const handleInputChange = (e) => {
+    switch (e.target.id) {
+      case "name":
+        {
+          setRegInfo((current) => {
+            return {
+              ...current,
+              name: e.target.value,
+            };
+          });
+        }
+        break;
+      case "nkname":
+        {
+          setRegInfo((current) => {
+            return {
+              ...current,
+              nickname: e.target.value,
+            };
+          });
+        }
+        break;
+      case "tel":
+        {
+          setRegInfo((current) => {
+            return {
+              ...current,
+              phone: e.target.value,
+            };
+          });
+        }
+        break;
+      default:
+        return;
     }
+  };
 
-    return (
-      <p onClick={handleClick}>
-        중복확인
-      </p>
-    )
-  }
+  const passwordInsert = (value) => {
+    setRegInfo((current) => {
+      return {
+        ...current,
+        password: value,
+      };
+    });
+  };
+
+  const openAuthModal = () => {
+    setAuth(true);
+  };
+
+  const closeAuthModal = () => {
+    setAuth(false);
+  };
+
+  const fn = async (regInfo) => {
+    try {
+      const { name, email, nickname, password, phone } = regInfo;
+      const registerRes = await axiosRegister(
+        name,
+        email,
+        nickname,
+        password,
+        phone
+      );
+
+      console.log(registerRes);
+      setAlert(true);
+
+      setTimeout(() => {
+        setAlert(false);
+      }, 3000);
+    } catch (err) {
+      alert("다시 입력 해주세요");
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log("email:", emailRef.current.value);
-    console.log("password:", passwordRef.current.value);
+    fn(regInfo);
   };
 
   return (
     <Contents>
+      {alert && <AlertModal>회원가입이 완료되었습니다.</AlertModal>}
+      {auth && <AuthEmail onClose={closeAuthModal} />}
+      <Title>모두 입력 해주세요.</Title>
       <form onSubmit={handleSubmit}>
-        {InputInfo.map((info) => {
-          return (
-            <InputBox>
-              <Input
-                ref={emailRef}
-                input={{
-                  name: info.name,
-                  type: info.type,
-                  id: info.id,
-                  placeholder: info.placeholder,
-                }}
-              />
-              {info.doublecheck ? <DoubleCheck /> : <></>}
-            </InputBox>
-          );
-        })}
+        <InputBox>
+          <Input
+            location={location}
+            input={{
+              name: "이메일",
+              type: "email",
+              id: "email",
+              placeholder: "이메일 형식을 지켜주세요(abcd@QQQ.com)",
+              value: `${regInfo.email}`,
+              readonly: true,
+            }}
+          />
+          <AuthButton onClick={openAuthModal}>인증하기</AuthButton>
+        </InputBox>
+        {props.input.map((info) => (
+          <InputBox key={info.id}>
+            <Input onChange={handleInputChange} input={info} />
+          </InputBox>
+        ))}
+        <PasswordChecker onInsert={passwordInsert} />
         <ButtonBox>
           <Button type="red" text="회원가입" />
         </ButtonBox>
@@ -103,9 +154,3 @@ function RegisterForm() {
 }
 
 export default RegisterForm;
-
-// ref: password,
-// name: "비밀번호",
-// type: "password",
-// id: "passwordIsValid",
-// placeholder: "비밀번호를 입력하세요",

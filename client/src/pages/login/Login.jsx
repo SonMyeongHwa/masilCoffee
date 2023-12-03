@@ -7,7 +7,7 @@ import { InputCard } from "./Login.style.jsx";
 
 function Login() {
   return (
-    <div>
+    
       <Container>
           <Title>LOGIN</Title>
         <Card>
@@ -16,7 +16,7 @@ function Login() {
           </InputCard>
         </Card>
       </Container>
-    </div>
+
   );
 }
 

@@ -62,6 +62,7 @@ export const Wrapper = styled.div`
 export const LeftBox = styled.div`
   width: 18%;
   border-right: solid 2px #ededed;
+  padding-bottom: 20px;
 
   @media all and (max-width: 1023px) {
     display: flex;
@@ -105,6 +106,7 @@ export const Takeout = styled.div`
 
 export const CenterBox = styled.div`
   width: 58%;
+  padding-bottom: 20px;
 
   @media all and (max-width: 1023px) {
     width: 100%;
@@ -131,6 +133,7 @@ export const RightBox = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 20px 40px 0;
+  padding-bottom: 20px;
 
   @media all and (max-width: 1023px) {
     justify-content: center;

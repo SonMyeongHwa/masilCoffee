@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "../../../components/ui/button/Button";
 import {
   StyledPayment,
@@ -7,15 +7,19 @@ import {
   StyledPaymentActionBox,
   StyledPaymentBox,
   StyledInfoBox,
-  StyledOrderList,
-  StyledOrderListMenu,
-  StyledOrderListMenuBox,
-  StyledAmountPayment,
   StyledInfoContainer,
   StyledActionBg,
 } from "./PaymentDone.style";
 
+import OderList from "../oderList/OderList";
+import { useSelector } from "react-redux";
+
 const PaymentDone = () => {
+
+  const payment = useSelector((state) => state.payment.orders);
+  console.log("오더 네임", payment);
+
+  const navigate = useNavigate();
   return (
     <StyledPaymentcontainer>
       <StyledPaymentBox>
@@ -37,35 +41,20 @@ const PaymentDone = () => {
         <StyledPayment>
           <StyledInfoContainer>
             <StyledInfoBox>
-              <StyledOrderList>
-                <h2>주문내역</h2>
-                <i></i>
-                <StyledOrderListMenu>
-                  <StyledOrderListMenuBox>
-                    <div>
-                      <b>에스프레소</b>
-                      <span>샷1</span>
-                    </div>
-                    <div>2잔</div>
-                    <div>9,000원</div>
-                  </StyledOrderListMenuBox>
-                  <i></i>
-                </StyledOrderListMenu>
-              </StyledOrderList>
-              <StyledAmountPayment>
-                <div>
-                  <h2>총 결제 금액</h2>
-                  <h2>9,000원</h2>
-                </div>
-                <i></i>
-              </StyledAmountPayment>
+              <OderList />
             </StyledInfoBox>
-            <Link to="/">
-              <Button text={"홈으로"} type={"grey"} />
-            </Link>
-            <Link to="/Cart">
-              <Button text={"마이페이지"} type={"red"} />
-            </Link>
+
+            <Button
+              onClick={() => navigate("/")}
+              text={"홈으로"}
+              type={"grey"}
+            />
+
+            <Button
+              onClick={() => navigate("/MyPage")}
+              text={"마이페이지"}
+              type={"red"}
+            />
           </StyledInfoContainer>
         </StyledPayment>
       </StyledPaymentBox>

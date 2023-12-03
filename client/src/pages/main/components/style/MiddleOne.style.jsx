@@ -84,6 +84,7 @@ export const MenuBox = styled.div`
   @media all and (max-width: 1023px) {
     float: left;
     clear: both;
+    // margin: 0 15%;
   }
 `;
 

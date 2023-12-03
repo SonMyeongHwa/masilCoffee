@@ -2,7 +2,7 @@ import { css } from 'styled-components';
 
 export const breakpoint = {
   large: '1023px',
-  medium: "767px",
+  medium: "768px",
 };
 
 export const media = {
@@ -12,9 +12,9 @@ export const media = {
         ${css(...args)}
       }
     `,
-  large: (...args) =>
+  mini: (...args) =>
     css`
-      @media screen and (min-width: ${breakpoint.large}) {
+      @media screen and (max-width: ${breakpoint.medium}) {
         ${css(...args)}
       }
     `,

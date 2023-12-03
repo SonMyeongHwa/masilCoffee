@@ -4,14 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const imageArr = [
-  "assets/images/image1.jpg",
-  "assets/images/image2.jpg",
-  "assets/images/image3.jpg",
-  "assets/images/image4.jpg"
-];
-
-const ImageSlider = () => {
+const ImageSlider = ({ images }) => {
   const settings = {
     dots: true,
     fade: true,
@@ -20,35 +13,39 @@ const ImageSlider = () => {
     slidesToScroll: 1,
   };
 
+  //navigate 막기
+  const stopPropagation = (e) => {
+    e.stopPropagation();
+  };
+
   return (
-    <ImageWrap>
+    <ImageWrap onClick={stopPropagation}>
       <StyledSlider {...settings}>
-        {imageArr.map((image) => (
-          <Image src={image} alt="" />
+        {images.map((image, index) => (
+          <Image key={index} src={image} alt="" onClick={stopPropagation} />
         ))}
-        {/* <SliderItem /> */}
       </StyledSlider>
     </ImageWrap>
   );
-}
+};
 
 export default ImageSlider;
 
 const StyledSlider = styled(Slider)`
   .slick-prev {
     z-index: 1;
-    left: 5px;
+    left: 9%;
   }
 
   .slick-next {
-    right: 15px;
+    right: 8%;
   }
 
   .slick-prev:before,
   .slick-next:before {
     font-size: 30px;
     /* opacity: 0.5; */
-    color: white;
+    color: #d9d9d9;
   }
 
   .slick-dots {
@@ -69,6 +66,7 @@ const StyledSlider = styled(Slider)`
 const ImageWrap = styled.div`
   width: 70%;
   margin: 0 auto;
+  cursor: auto;
 
   @media all and (max-width: 767px) {
     width: 90%;
@@ -78,4 +76,7 @@ const ImageWrap = styled.div`
 const Image = styled.img`
   height: auto; /* 이미지의 높이를 자동으로 조정하여 가로세로 비율을 유지함 */
   aspect-ratio: 1 / 1; /* 이미지의 종횡비를 1:1로 설정하여 정사각형으로 만듦 */
+  width: 100%; /* 이미지의 너비를 컨테이너의 너비에 맞춤 */
+  object-fit: contain; /* 이미지가 컨테이너를 채우도록 하면서 비율 유지 */
+  background-color: white;
 `;
