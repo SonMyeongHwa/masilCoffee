@@ -22,7 +22,7 @@ export const Form = styled.form`
   width: 100%;
   color: #939393;
   font-size: 18px;
-  margin-left: 8%;
+  margin-left: 12%;
 `;
 
 export const P = styled.p``;

@@ -1,6 +1,5 @@
 import Main from "../pages/main/MainPage";
 import Login from "../pages/login/Login";
-import Logout from "../pages/login/Logout";
 import Register from "../pages/register/Register";
 
 import Order from "../pages/order/Order";
@@ -43,11 +42,6 @@ export const ROUTES = {
     link: "/login",
     element: <Login />,
   },
-  LOGOUT: {
-    path: "/logout",
-    link: "/logout",
-    element: <Logout />,
-  },
   REGISTER: {
     path: "/Register",
     link: "/Register",
@@ -82,7 +76,7 @@ export const ROUTES = {
   },
   RECIPEVIEW: {
     path: "/RecipeView",
-    link: "/RecipeView/:boardId",
+    link: "/RecipeView",
     element: <RecipeView />,
   },
   RECIPEWRITE: {
@@ -97,28 +91,28 @@ export const ROUTES = {
     element: <MyPage />,
   },
   USERINFOCHANGE: {
-    path: "/mypage/userInfoChange",
-    link: "/mypage/userInfoChange/:email",
+    path: "/UserInfoChange",
+    link: "/UserInfoChange",
     element: <UserInfoChange />,
   },
   CONFIRMPASSWORD: {
-    path: "/mypage/confirmPassword",
-    link: "/mypage/confirmPassword/:req",
+    path: "/ConfirmPassword",
+    link: "/ConfirmPassword",
     element: <ConfirmPassword />,
   },
   ORDERDETAILS: {
-    path: "/mypage/orderDetails",
-    link: "/mypage/orderDetails/:user_id",
+    path: "/OrderDetails",
+    link: "/OrderDetails",
     element: <OrderDetails />,
   },
   WRITELIST: {
-    path: "/mypage/writeList",
-    link: "/mypage/writeList/:user_id",
+    path: "/WriteList",
+    link: "/WriteList",
     element: <WriteList />,
   },
   COMMENTLISTPAGE: {
-    path: "/mypage/commentListpage",
-    link: "/mypage/commentListpage/:user_id",
+    path: "/CommentListpage",
+    link: "/CommentListpage",
     element: <CommentListPage />,
   },
 
@@ -137,7 +131,6 @@ export const ROUTES = {
     link: "/admin/user",
     element: <AdminUser />,
   },
-  
   NOTFOUND: {
     path: "/*",
     link: "/*",

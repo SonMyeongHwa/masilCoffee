@@ -1,10 +1,6 @@
 import * as Sidebar from "./Sidebar.style";
-import { useSelector } from "react-redux";
 
-const AdminSidebar = () => {
-  const receiptedOrder = useSelector((state) => state.payment.receipted);
-  const orderCount = receiptedOrder.length;
-
+const AdminSidebar = ({ orderCount }) => {
   return (
     <Sidebar.Container>
       <Sidebar.Category>
@@ -20,5 +16,7 @@ const AdminSidebar = () => {
     </Sidebar.Container>
   );
 };
+
+AdminSidebar.defaultProps = { orderCount: 1 };
 
 export default AdminSidebar;

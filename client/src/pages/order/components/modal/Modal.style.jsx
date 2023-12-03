@@ -27,53 +27,146 @@ export const StyleModalContainer = styled.div`
   height: auto;
   padding: 50px;
   background-color: white;
-  overflow-x: hidden;
-  /* 모바일 환경을 위한 미디어 쿼리 */
-  @media (max-width: 966px) {
-    width: 80%;
-  }
-  /* 탭을 위한 미디어 쿼리 */
-  @media (max-width: 640px) {
-    max-width: 70%;
-  }
 `;
 export const StyleXContainer = styled.div`
   width: 650px;
   display: flex;
   justify-content: end;
-  align-items: center;
-  position: relative;
 `;
 export const StyleX = styled.div`
   width: 30px;
   height: 30px;
-  background-color: #472e27;
+  background-color: #650818;
   border-radius: 100%;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  position: absolute;
-  top: 0;
-  right: 0;
-  // 기본 스타일
-  @media (max-width: 966px) {
-    // 모바일 환경에서의 위치 조정
-    top: 0;
-    right: 15%;
-    overflow-x: hidden;
+`;
+
+export const StyleText = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  width: 510px;
+`;
+export const StyleImg = styled.div`
+  width: 255px;
+  height: 255px;
+  background-color: #f5f5f5;
+  border-radius: 40px;
+  cursor: pointer;
+  padding: 0;
+`;
+export const StyleInfo = styled.div`
+  width: 255px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  > span {
+    font-size: 25px;
+    font-weight: 900;
   }
-  @media (max-width: 764px) {
-    // 탭 환경에서의 위치 조정
-    top: 0;
-    right: 20%;
-    overflow-x: hidden;
+`;
+export const StyleDisplay = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+
+  > span {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 15px;
+    background-color: #8e0e28;
+    border-radius: 100%;
+    color: white;
   }
-  @media (max-width: 704px) {
-    // 탭 환경에서의 위치 조정
-    top: 0;
-    right: 25%;
-    overflow-x: hidden;
+`;
+export const StylePaddingSpan = styled.div`
+  color: #8e0e28;
+  font-size: 20px;
+  font-weight: 600;
+`;
+export const StyleQuantity = styled.div`
+  > span {
+    padding: 0 32px;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  button {
+    border: 1px solid #878585;
+    border-radius: 100%;
+    width: 25px;
+    height: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: white;
+  }
+`;
+export const StyleSlide = styled.div`
+  width: 650px;
+`;
+
+export const StyleSlideBox = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "isSlideOpen",
+})`
+  max-height: ${({ isSlideOpen }) => (isSlideOpen ? "258px" : "0")};
+  transition: max-height 0.5s ease-in-out;
+  max-height: ${(props) =>
+    props.isSlideOpen ? "300px" : "0"}; // 예시로 300px 설정
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+`;
+export const StyleSlideBoxText = styled.div`
+  display: flex;
+  flex-direction: column;
+  div {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    font-weight: 900;
+  }
+  i {
+    width: 650px;
+    height: 1px;
+    border-top: 2px solid #8e0e28;
+  }
+`;
+
+export const StyleButton = styled.div`
+  margin-top: 70px;
+`;
+
+// 디테일 옵션
+export const StyleShotModal = styled.div`
+  .slide-enter {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  .slide-enter-active {
+    transform: translateY(0);
+    opacity: 1;
+    transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
+  }
+
+  .slide-exit {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .slide-exit-active {
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
   }
 `;

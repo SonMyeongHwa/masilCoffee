@@ -1,25 +1,24 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import * as S from "../../style/MyPage.style";
 import { ROUTES } from "../../../../router/Routes";
-import { useNavigate } from "react-router-dom";
 
+User.defaultProps = {
+  userName: "김영준",
+};
 
-function User({ userName, email }) {
-  const nav = useNavigate();
-
-  const handleClick = () => {
-    nav(`${ROUTES.USERINFOCHANGE.path}/${email}`)
-  }
-
+function User({ userName }) {
   return (
+    <div>
       <S.UserLinkBox>
         <>
-          안녕하세요! <br /> "{userName}"님
-          <div onClick={handleClick}>
+          안녕하세요! <br /> {userName}님
+          <Link to={ROUTES.CONFIRMPASSWORD.path}>
             <S.LinkUserInfo>회원 정보 변경</S.LinkUserInfo>
-          </div>
+          </Link>
         </>
       </S.UserLinkBox>
+    </div>
   );
 }
 

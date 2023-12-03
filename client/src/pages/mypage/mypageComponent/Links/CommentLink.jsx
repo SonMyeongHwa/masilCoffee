@@ -1,18 +1,15 @@
+import { Link } from "react-router-dom";
 import React from "react";
 import * as S from "../../style/MyPage.style";
-import { ROUTES } from "../../../../router/Routes";
-import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../../../router/Routes"; 
 
-function CommentLink({ userId }) {
-  const nav = useNavigate();
-
-  const handleClick = () => {
-    nav(`${ROUTES.COMMENTLISTPAGE.path}/${userId}`);
-  };
+function CommentLink() {
   return (
-
-      <S.CommentLinkBox onClick={handleClick}>내가 쓴 댓글</S.CommentLinkBox>
-   
+    <div>
+      <Link to={ROUTES.COMMENTLISTPAGE.path} style={{textDecoration: "none"}}>
+        <S.CommentLinkBox>Link to Comment</S.CommentLinkBox>
+      </Link>
+    </div>
   );
 }
 

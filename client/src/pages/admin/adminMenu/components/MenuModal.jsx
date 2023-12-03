@@ -1,94 +1,47 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
 import * as Modal from "./style/Modal.style";
 import MenuSelect from "./MenuSelect";
 import { TiDelete } from "react-icons/ti";
-import { actionGetAllProducts, actionCreateProduct, actionUpdateProduct } from "../../../../redux/action/productAction";
-import { createProduct, updateProduct } from "../../../../api/product";
+import { actionCreateProduct } from "../../../../redux/action/productAction";
+import { createProduct } from "../../../../api/product";
 
-const MenuModal = ({ title, closeModal, modifyProduct }) => {
+const MenuModal = ({ title, closeModal }) => {
   const dispatch = useDispatch();
+  const formRef = useRef(null);
 
-  const sizeOptions = ["선택없음", "Tall", "Large"];
-  const tempOptions = ["선택없음", "Ice", "Hot"];
-  const categoryOptions = ["선택없음", "에스프레소", "논커피", "스무디", "티", "에이드"];
+  const size = ["Tall", "Large"];
+  const temp = ["Ice", "Hot"];
+  const category = ["에스프레소", "논커피", "스무디", "티", "에이드"];
 
-  const formData = new FormData();
+  const [selectedFile, setSelectedFile] = useState(null);
 
-  const [product, setProduct] = useState({
-    name: "",
-    price: "",
-    category: "",
-    size: "",
-    temp: "",
-    kcal: "",
-    info: "",
-    file: "",
-    recipe: "",
-  });
-
-  formData.append("name", product.name);
-  formData.append("price", product.price);
-  formData.append("category", product.category);
-  formData.append("size", product.size);
-  formData.append("temp", product.temp);
-  formData.append("kcal", product.kcal);
-  formData.append("info", product.info);
-  formData.append("file", product.file);
-  formData.append("recipe", product.recipe);
-
-  useEffect(() => {
-    if (modifyProduct) {
-      setProduct({ ...modifyProduct });
-    } else {
-      setProduct({
-        name: "",
-        price: "",
-        category: "",
-        size: "",
-        temp: "",
-        kcal: "",
-        info: "",
-        file: "",
-        recipe: "",
-      });
-    }
-  }, [modifyProduct]);
-
-  const handleChange = (key, e) => {
-    if (key === "file") {
-      const updatedProductFile = { ...product, [key]: e.target.files[0] };
-      setProduct(updatedProductFile);
-    } else {
-      const updatedProduct = { ...product, [key]: e.target.value };
-      setProduct(updatedProduct);
-    }
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const formData = new FormData(formRef.current);
+    const selectedValue = formRef.current.size.value;
+    formData.append("image", selectedFile);
+    formData.append("size", selectedValue);
+
+    for (const pair of formData.entries()) {
+      console.log("formdata", pair[0] + ", " + pair[1]);
+    }
+
     const fn = async () => {
-      if (modifyProduct) {
-        try {
-          const updatedProduct = await updateProduct(modifyProduct._id, formData);
-          console.log("modifyProduct", modifyProduct, updatedProduct);
-          dispatch(actionUpdateProduct(updatedProduct));
-        } catch (error) {
-          console.error("Failed to update product", error);
-        }
-      } else {
-        try {
-          const newProduct = await createProduct(formData);
-          dispatch(actionCreateProduct(newProduct));
-          dispatch(actionGetAllProducts());
-        } catch (error) {
-          console.error("Failed to create product", error);
-        }
+      try {
+        const newProducts = await createProduct(formData);
+        console.log(newProducts);
+        dispatch(actionCreateProduct(newProducts));
+      } catch (err) {
+        console.log("err", err);
       }
     };
     fn();
-    closeModal();
   };
 
   return (
@@ -98,69 +51,52 @@ const MenuModal = ({ title, closeModal, modifyProduct }) => {
           <p>{title}</p>
           <TiDelete className="cancelIcon" onClick={closeModal} />
         </Modal.Title>
-        <Modal.Form onSubmit={handleSubmit}>
+        <Modal.Form ref={formRef} onSubmit={handleSubmit}>
           <Modal.P>
             <Modal.Label>이름 :</Modal.Label>
-            <Modal.Input type="text" name="name" defaultValue={product.name || ""} onChange={(e) => handleChange("name", e)} required />
+            <Modal.Input type="text" name="name" required />
           </Modal.P>
           <Modal.P>
             <Modal.Label>가격 :</Modal.Label>
             <Modal.InputContainer>
-              <Modal.Input type="number" name="price" defaultValue={product.price || ""} onChange={(e) => handleChange("price", e)} required />
+              <Modal.Input type="number" name="price" required />
               <Modal.CurrencyText>원</Modal.CurrencyText>
             </Modal.InputContainer>
           </Modal.P>
           <Modal.P>
             <Modal.Label>종류 :</Modal.Label>
-            <MenuSelect
-              options={categoryOptions}
-              modal
-              name="category"
-              defaultOption={product.category}
-              onChange={(selected) => handleChange("category", selected)}
-            />
+            <MenuSelect options={category} modal name="category" />
           </Modal.P>
           <Modal.P>
             <Modal.Label>사이즈 :</Modal.Label>
-            <MenuSelect
-              options={sizeOptions}
-              modal
-              name="size"
-              defaultOption={product.size}
-              onChange={(selected) => handleChange("size", selected)}
-            />
+            <MenuSelect options={size} modal name="size" />
           </Modal.P>
           <Modal.P>
             <Modal.Label>ICE/HOT :</Modal.Label>
-            <MenuSelect
-              options={tempOptions}
-              modal
-              name="temp"
-              defaultOption={product.temp}
-              onChange={(selected) => handleChange("temp", selected)}
-            />
+            <MenuSelect options={temp} modal name="temp" />
           </Modal.P>
           <Modal.P>
             <Modal.Label>1회 제공량 :</Modal.Label>
             <Modal.InputContainer>
-              <Modal.Input type="number" name="kcal" defaultValue={product.kcal || ""} onChange={(e) => handleChange("kcal", e)} required />
+              <Modal.Input type="number" name="kcal" required />
               <Modal.CurrencyText>kcal</Modal.CurrencyText>
             </Modal.InputContainer>
           </Modal.P>
           <Modal.TextareaBox>
             <Modal.Label>상세 설명 :</Modal.Label>
-            <textarea name="info" cols="30" rows="3" defaultValue={product.info || ""} onChange={(e) => handleChange("info", e)} required />
+            <textarea name="info" cols="30" rows="3" required />
           </Modal.TextareaBox>
           <Modal.Label>사진 추가 :</Modal.Label>
           <Modal.ImgBox>
             <Modal.ImgLabel htmlFor="file">파일 선택</Modal.ImgLabel>
-            <input type="file" id="file" name="file" defaultValue={product.file || ""} onChange={(e) => handleChange("file", e)} required />
-            <p>{product.file && product.file.name}</p>
+            <input type="file" id="file" onChange={handleFileChange} name="image" required />
+            <p>{selectedFile && selectedFile.name}</p>
           </Modal.ImgBox>
           <Modal.TextareaBox large>
             <Modal.Label>꿀조합 추천 정보 :</Modal.Label>
-            <textarea name="recipe" cols="30" defaultValue={product.recipe || ""} onChange={(e) => handleChange("recipe", e)} rows="3" required />
+            <textarea name="bestCombo" cols="30" rows="3" required />
           </Modal.TextareaBox>
+
           <Modal.Submit type="submit" onClick={handleSubmit}>
             제출하기
           </Modal.Submit>

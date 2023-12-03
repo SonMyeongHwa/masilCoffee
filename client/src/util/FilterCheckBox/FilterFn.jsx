@@ -1,18 +1,17 @@
-// const query = {
-//   name : "김영준",
-//   phone: "010-9210-1233",
-//   nickname: "홍홍홍"
-// }
 
-// const {name, phone, nickname} = query;
+const FilterFn = (filters, query) => (item) => {
+  const filterItem = (filterObj, data) =>
+    Object.values(filterObj).reduce((acc, fn) => {
+      acc.push(fn(data));
+      return acc;
+    }, []);
 
-// typeof name // string,
+  return (
+    filterItem(filters, item)
+      .map((str) => str.toLowerCase())
+      .join()
+      .search(query) !== -1
+  );
+};
 
-// const findUser = searchData.map(user => {
-//   if(user.name.search(name) !== -1) {
-//     return user
-//   } else if (user.phone.search(phone) !== -1) {
-//     return user
-//   } else if (user.nickname.search(nickname) !== -1) {
-//     return user
-//   }
+export default FilterFn;

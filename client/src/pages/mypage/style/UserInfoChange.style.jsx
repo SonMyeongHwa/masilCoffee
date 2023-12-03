@@ -1,6 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const InputBoxColumn = styled.div`
+
   width: 900px;
   height: auto;
 
@@ -18,4 +19,4 @@ export const InputBoxColumn = styled.div`
 
   padding-left: 12px;
   padding-right: 12px;
-`;
+`
