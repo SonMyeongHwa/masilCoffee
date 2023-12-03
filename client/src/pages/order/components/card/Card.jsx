@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-
 import Button from "../../../../components/ui/button/Button";
 import Modal from "../../components/modal/Modal";
-import { StyledCard, StyledText, StyledImage, StyledButtonText } from "./Card.style";
-import ModalContents from "../modalcontents/ModalContents";
+import { StyledCard, StyledText, StyledButtonText } from "./Card.style";
 
 const Card = ({ data }) => {
   // 카드 클릭 시 추천 꿀 조합 텍스트와 주문하기 버튼 나옴
@@ -19,33 +17,19 @@ const Card = ({ data }) => {
   return (
     <div className="card">
       <StyledCard onClick={handleClickMenu} $clickMenu={clickMenu}>
-        {/* 클릭 시 이미지와 텍스트 표시 */}
         {clickMenu && (
-          <>
-            <StyledButtonText>
-              <div>
-                <b>추천 꿀 조합</b>
-                <p>{data.recipe}</p>
-              </div>
-
-              <Button type="white" text={"주문하기"} onClick={openModal} />
-            </StyledButtonText>
-          </>
+          <StyledButtonText>
+            <b>{data.honeyTip.title}</b>
+            <p>{data.honeyTip.description}</p>
+            <Button type="white" text={"주문하기"} onClick={openModal} />
+          </StyledButtonText>
         )}
-        {/* 이미지 가져오기 */}
-
-        <StyledImage src={data.image_url} alt={data.name} $clickMenu={clickMenu}></StyledImage>
       </StyledCard>
       <StyledText>
-        {isModalOpen && (
-          <Modal openModal={openModal} closeModal={closeModal}>
-            <ModalContents data={data} />
-          </Modal>
-        )}
-
+        {isModalOpen && <Modal openModal={openModal} closeModal={closeModal} />}
         <b>{data.name}</b>
-        <p>{data.info}</p>
-        <p>칼로리 : {data.kcal}</p>
+        <p>{data.description}</p>
+        <p>칼로리 : {data.calories}</p>
       </StyledText>
     </div>
   );

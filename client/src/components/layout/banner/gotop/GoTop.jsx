@@ -1,36 +1,28 @@
 import React from "react";
 import IncludeRedPage from "../../../../util/IncludeRedPage";
-import backgroundColor from "../../../../util/BackgoundColor";
-import { ControllUp } from "../Banner.style";
+
+const img_data = {
+  red: "/assets/images/top.png",
+  white: "/assets/images/topWhite.png",
+};
 
 function GoTop(props) {
+  const src = IncludeRedPage(props.location) ? img_data.white : img_data.red;
+  
 
   const handleClick = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
 
-  
-  const [scrollPosition, setScrollPosition] = React.useState(0);
-  const handleScroll = () => {
-    const position = window.pageYOffset;
-    setScrollPosition(position);
-  };
 
-  React.useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   return (
-    <div style={{
-      opacity: scrollPosition === 0 ? "0" : "1",
-      transition: "opacity 0.3s",
-    }}>
-      <ControllUp onClick={handleClick} location={props.location}/>
+    <div>
+      <img
+        src={src}
+        onClick={handleClick}
+      />
     </div>
   );
 }

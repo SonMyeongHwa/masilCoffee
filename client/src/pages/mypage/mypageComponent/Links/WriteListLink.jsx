@@ -1,20 +1,16 @@
-import React from "react";
-import * as S from "../../style/MyPage.style";
-import { ROUTES } from "../../../../router/Routes";
-import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import React from 'react'
+import *as S from '../../style/MyPage.style';
+import { ROUTES } from '../../../../router/Routes';
 
-function WriteListLink({ userId }) {
-  const nav = useNavigate();
-  
-
-  const handleClick = () => {
-    nav(`${ROUTES.WRITELIST.path}/${userId}`);
-  };
-
+function WriteListLink() {
   return (
-      <S.WriteLinkBox onClick={handleClick}>내가 쓴 글</S.WriteLinkBox>
-    
-  );
+    <div>
+      <Link to={ROUTES.WRITELIST.path} style={{textDecoration: "none"}}>
+        <S.WriteLinkBox>Link to Wrtier</S.WriteLinkBox>
+        </Link>
+    </div>
+  )
 }
 
-export default WriteListLink;
+export default WriteListLink

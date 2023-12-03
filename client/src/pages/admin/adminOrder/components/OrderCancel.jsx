@@ -1,31 +1,13 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import * as Cancel from "./style/OrderCancel.style";
 import { TiDelete } from "react-icons/ti";
-import { updatePayment } from "../../../../api/payment/payment";
-import { actionUpdateOrder } from "../../../../redux/action/paymentAction";
 
-const OrderCancel = ({ closeModal, orderId }) => {
-  const dispatch = useDispatch();
+const OrderCancel = ({ closeModal }) => {
   const [selectedReason, setSelectedReason] = useState("");
   const cancelReasons = ["고객 요청", "재료 소진", "가게 사정"];
 
   const handleClick = (reason) => {
     setSelectedReason(reason);
-  };
-
-  const handleCancelSubmit = () => {
-    const fn = async () => {
-      try {
-        const updateStatus = { status: selectedReason };
-        const updatedData = await updatePayment(orderId, updateStatus);
-        dispatch(actionUpdateOrder(updatedData));
-      } catch (err) {
-        console.log("err", err);
-      }
-    };
-    fn();
-    closeModal();
   };
 
   return (
@@ -45,7 +27,7 @@ const OrderCancel = ({ closeModal, orderId }) => {
             );
           })}
         </Cancel.ReasonWrapper>
-        <Cancel.CompleteButton onClick={handleCancelSubmit}>취소 완료</Cancel.CompleteButton>
+        <Cancel.CompleteButton onClick={() => console.log(selectedReason)}>취소 완료</Cancel.CompleteButton>
       </Cancel.ModalBox>
     </Cancel.ModalBackground>
   );

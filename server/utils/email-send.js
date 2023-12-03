@@ -19,17 +19,7 @@ const smtpTransporter = nodemailer.createTransport({
   },
 });
 
-const sendMail = async (to, num) => {
-  if (!to || typeof to !== "string" || !to.includes("@")) {
-    return {
-      success: false,
-      message: "수신자 이메일 주소가 유효하지 않습니다.",
-    };
-  }
-
-  const expireTime = 300000; // 5분, ms
-  const sentTime = new Date();
-
+const sendMail = async (res, to, num) => {
   const mailOptions = {
     from: NAVER_EMAIL,
     to,
@@ -39,15 +29,9 @@ const sendMail = async (to, num) => {
 
   try {
     const result = await smtpTransporter.sendMail(mailOptions);
-    return {
-      success: true,
-      message: "이메일이 발송 되었습니다.",
-      sentTime,
-      expireTime,
-    };
+    res.status(200).json({ message: "이메일이 발송 되었습니다." });
   } catch (error) {
-    console.error("이메일 발송 실패:", error);
-    return { success: false, message: "이메일 발송 실패" };
+    res.status(500).json({ message: "이메일 발송 실패" });
   }
 };
 

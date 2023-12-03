@@ -46,8 +46,3 @@ export const Button = styled.button`
     margin-left: 15px;
   }
 `;
-
-
-export const Anchor = styled.td`
-  text-align: center;
-`

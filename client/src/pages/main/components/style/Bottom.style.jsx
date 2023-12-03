@@ -1,51 +1,76 @@
 import styled from "styled-components";
 
+export const Bottom = styled.div``;
+export const BottomBox = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  padding: 30px;
+  border-radius: 20px;
+
+  background-color: ${(props) => props.$bgColor || "defaultColor"};
+  color: ${(props) => (props.$bgColor === "#d9d9d9" ? "black" : "white")};
+  border: ${(props) => (props.isEven ? "1px solid #191414" : "none")};
+  width: 100%;
+
+  @media (max-width: 768px) {
+    width: 100%; // 화면이 작을 때 가로 크기 조절
+    font-size: smaller;
+  }
+
+  > div > b {
+    font-size: 20px;
+  }
+  > div > p {
+    font-size: 17px;
+  }
+  @media (max-width: 768px) {
+    padding: 5px;
+    font-size: smaller;
+  }
+`;
 export const BottomSlide = styled.div`
-  width: 2000px;
-  margin: 0 auto;
-  margin-top: 80px;
   background-color: ${(props) => props.$bgColor || "defaultColor"};
 
   .slick-slider {
-    width: 2000px;
     overflow-x: hidden;
-    height: 500px;
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+
+  // 네비게이션 버튼 숨김
+  .slick-prev,
+  .slick-next {
+    display: none;
   }
 
   .slick-track {
-    width: 1920px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
   }
 
   .slick-track > div {
     box-sizing: border-box;
     height: auto;
+    margin: 0 30px;
+
     word-wrap: break-word;
     overflow-wrap: break-word;
     color: white;
     cursor: pointer;
+
+    display: flex;
+    align-items: center;
   }
   .slick-track > div > div {
-    width: 460px;
     display: block;
+    padding: 20px;
   }
   .slick-track > div > div > div {
     display: block;
   }
-`;
-
-export const Bottom = styled.div`
-  width: 400px;
-`;
-export const BottomBox = styled.div`
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 30px;
-  border-radius: 20px;
-  margin: 70px 10px;
-
-  background-color: ${(props) => props.$bgColor || "defaultColor"};
-  color: ${(props) => (props.$bgColor === "#d9d9d9" ? "black" : "white")};
-  /* border: ${(props) => (props.isEven ? "1px solid #191414" : "none")}; */
 `;
 
 export const SquareButtonBox = styled.div`
@@ -54,13 +79,12 @@ export const SquareButtonBox = styled.div`
 `;
 export const SquareButton = styled.div`
   margin-right: 10px;
-  /* padding: 10px 0; */
+  padding: 10px 0;
   background-color: ${(props) => props.$bgColor || "defaultColor"};
   > Button {
     font-size: 14px;
   }
 `;
-export const Button = styled.span``;
 export const BsChat = styled.div`
   padding-top: 10px;
   display: flex;
@@ -69,51 +93,4 @@ export const BsChat = styled.div`
   > span {
     padding-left: 10px;
   }
-`;
-export const TagBox = styled.span`
-  padding: 10px 15px;
-  margin: 0 5px 5px 0;
-  border-radius: 30px;
-  background-color: white;
-  color: black;
-  font-size: 0.8rem;
-  white-space: nowrap;
-  font-weight: 600;
-  height: 10px;
-  margin-right: 8px;
-  display: flex;
-  align-items: center;
-`;
-export const TagWrap = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-//댓글, 좋아요 감싸는 div
-export const CommentWrap = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 20px;
-`;
-
-// 좋아요 div
-export const LikedWrap = styled.div`
-  display: flex;
-`;
-
-//댓글, 좋아요 갯수
-export const CommentNum = styled.span`
-  margin-left: 3px;
-  width: 30px;
-`;
-
-export const Post = styled.p`
-  text-overflow: ellipsis;
-  overflow: hidden;
-  height: 50px;
-  width: 380px;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  -webkit-line-clamp: 2;
 `;

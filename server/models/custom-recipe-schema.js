@@ -20,7 +20,6 @@ const CustomRecipeSchema = new Schema(
   },
   {
     timestamps: true,
-    versionKey: false,
   }
 );
 
